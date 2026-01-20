@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup
-	x:Class="UsFrameApp.Popups.RejoinPopup"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-	Size="300,180">
+    x:Class="UsFrameApp.Popups.RejoinPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Size="300,180">
 
-	<Border
-		Padding="18"
-		BackgroundColor="#FFFFFF"
-		StrokeShape="RoundRectangle 12">
-		<VerticalStackLayout HorizontalOptions="Fill" Spacing="12">
-			<Label
-				FontAttributes="Bold"
-				FontSize="18"
-				HorizontalTextAlignment="Center"
-				Text="Left the room"
-				TextColor="#146CFF" />
-			<Label
-				FontSize="14"
-				HorizontalTextAlignment="Center"
-				Text="Would you like to rejoin the room?"
-				TextColor="#333" />
-			<Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-				<Button
-					BackgroundColor="#F1F1F1"
-					Clicked="OnCancelClicked"
-					CornerRadius="8"
-					Text="Cancel"
-					TextColor="#146CFF" />
-				<Button
-					Grid.Column="1"
-					BackgroundColor="#146CFF"
-					Clicked="OnRejoinClicked"
-					CornerRadius="8"
-					Text="Rejoin Room"
-					TextColor="White" />
-			</Grid>
-		</VerticalStackLayout>
-	</Border>
+    <Border
+        Padding="{OnIdiom Phone=18,
+                          Tablet=24,
+                          Desktop=30}"
+        BackgroundColor="#FFFFFF"
+        StrokeShape="RoundRectangle 12">
+        <VerticalStackLayout HorizontalOptions="Fill" Spacing="{OnIdiom Phone=12, Tablet=18, Desktop=22}">
+            <Label
+                FontAttributes="Bold"
+                FontSize="{OnIdiom Phone=18,
+                                   Tablet=22,
+                                   Desktop=26}"
+                HorizontalTextAlignment="Center"
+                Text="Left the room"
+                TextColor="#146CFF" />
+            <Label
+                FontSize="{OnIdiom Phone=14,
+                                   Tablet=16,
+                                   Desktop=18}"
+                HorizontalTextAlignment="Center"
+                Text="Would you like to rejoin the room?"
+                TextColor="#333" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="{OnIdiom Phone=10, Tablet=14, Desktop=18}">
+                <Button
+                    BackgroundColor="#F1F1F1"
+                    Clicked="OnCancelClicked"
+                    CornerRadius="8"
+                    Text="Cancel"
+                    TextColor="#146CFF" />
+                <Button
+                    Grid.Column="1"
+                    BackgroundColor="#146CFF"
+                    Clicked="OnRejoinClicked"
+                    CornerRadius="8"
+                    Text="Rejoin Room"
+                    TextColor="White" />
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
 </toolkit:Popup>

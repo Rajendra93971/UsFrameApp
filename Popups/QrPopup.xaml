@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup
-	x:Class="UsFrameApp.Popups.QrPopup"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    x:Class="UsFrameApp.Popups.QrPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
 
-	<Border
-		x:Name="QrBorder"
-		Padding="0,20"
-		BackgroundColor="White"
-		HorizontalOptions="Center"
-		Stroke="Transparent"
-		StrokeShape="RoundRectangle 16"
-		VerticalOptions="Center"
-		WidthRequest="{OnIdiom Phone=260,
-		                       Tablet=300,
-		                       Desktop=340}">
-		<Border.Shadow>
-			<Shadow Opacity="0" />
-		</Border.Shadow>
+    <Border
+        x:Name="QrBorder"
+        Padding="{OnIdiom Phone='0,20',
+                          Tablet='0,28',
+                          Desktop='0,32'}"
+        BackgroundColor="White"
+        HorizontalOptions="Center"
+        StrokeShape="RoundRectangle 16"
+        Style="{StaticResource CustomBorder}"
+        VerticalOptions="Center"
+        WidthRequest="{OnIdiom Phone=260,
+                               Tablet=300,
+                               Desktop=340}">
+        <Border.Shadow>
+            <Shadow Opacity="0" />
+        </Border.Shadow>
 
-		<VerticalStackLayout HorizontalOptions="Center" Spacing="16">
+        <VerticalStackLayout HorizontalOptions="Center" Spacing="{OnIdiom Phone=16, Tablet=22, Desktop=26}">
 
 
-			<!--  Title: instructs user to scan the QR code to join the meeting  -->
-			<Label
-				FontAttributes="Bold"
-				FontSize="16"
-				HorizontalTextAlignment="Start"
-				Text="SCAN TO JOIN ROOM"
-				TextColor="#3A3A5A"
-				VerticalTextAlignment="Start" />
+            <!--  Title: instructs user to scan the QR code to join the meeting  -->
+            <Label
+                FontAttributes="Bold"
+                FontSize="{OnIdiom Phone=16,
+                                   Tablet=19,
+                                   Desktop=21}"
+                HorizontalTextAlignment="Start"
+                Text="SCAN TO JOIN ROOM"
+                TextColor="#3A3A5A"
+                VerticalTextAlignment="Start" />
 
-			<Image
-				x:Name="QrImage"
-				Aspect="AspectFit"
-				HeightRequest="200"
-				WidthRequest="200" />
+            <Image
+                x:Name="QrImage"
+                Aspect="AspectFit"
+                HeightRequest="{OnIdiom Phone=200,
+                                        Tablet=240,
+                                        Desktop=280}"
+                WidthRequest="{OnIdiom Phone=200,
+                                       Tablet=240,
+                                       Desktop=280}" />
 
-		</VerticalStackLayout>
-	</Border>
+
+        </VerticalStackLayout>
+    </Border>
 
 </toolkit:Popup>

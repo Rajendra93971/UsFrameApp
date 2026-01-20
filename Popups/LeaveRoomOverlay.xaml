@@ -6,60 +6,80 @@
     HorizontalOptions="Center"
     VerticalOptions="Center">
 
-	<Border
-        Padding="24"
+    <Border
+        Padding="{OnIdiom Phone=24,
+                          Tablet=32,
+                          Desktop=40}"
         BackgroundColor="#FFFFFF"
         HorizontalOptions="Center"
         StrokeShape="RoundRectangle 20"
         StrokeThickness="0"
+        Style="{StaticResource CustomBorder}"
         VerticalOptions="Center"
         WidthRequest="{OnIdiom Phone=320,
                                Tablet=360,
                                Desktop=400}">
 
-		<VerticalStackLayout HorizontalOptions="Center" Spacing="16">
+        <VerticalStackLayout HorizontalOptions="Center" Spacing="16">
 
-			<!--  Icon: illustrative graphic for leave confirmation  -->
-			<Border
+            <!--  Icon: illustrative graphic for leave confirmation  -->
+            <Border
                 BackgroundColor="#EAF1FF"
-                HeightRequest="64"
+                HeightRequest="{OnIdiom Phone=64,
+                                        Tablet=80,
+                                        Desktop=96}"
                 HorizontalOptions="Center"
                 StrokeShape="RoundRectangle 32"
+                Style="{StaticResource CustomBorder}"
                 VerticalOptions="Center"
-                WidthRequest="64">
+                WidthRequest="{OnIdiom Phone=64,
+                                       Tablet=80,
+                                       Desktop=96}">
 
-				<Image
+                <Image
                     Aspect="Fill"
-                    HeightRequest="60"
+                    HeightRequest="{OnIdiom Phone=60,
+                                            Tablet=72,
+                                            Desktop=84}"
                     HorizontalOptions="Center"
                     Rotation="180"
                     Source="backicon.png"
                     VerticalOptions="Center"
-                    WidthRequest="60" />
-			</Border>
+                    WidthRequest="{OnIdiom Phone=60,
+                                           Tablet=72,
+                                           Desktop=84}" />
+            </Border>
 
-			<!--  Title: leave room confirmation title  -->
-			<Label
+            <!--  Title: leave room confirmation title  -->
+            <Label
                 FontAttributes="Bold"
-                FontSize="20"
+                FontSize="{OnIdiom Phone=20,
+                                   Tablet=24,
+                                   Desktop=28}"
                 HorizontalTextAlignment="Center"
                 Text="Leave Room"
                 TextColor="#146CFF" />
 
-			<!--  Message: user-facing confirmation text  -->
-			<Label
-                FontSize="14"
+            <!--  Message: user-facing confirmation text  -->
+            <Label
+                FontSize="{OnIdiom Phone=14,
+                                   Tablet=16,
+                                   Desktop=18}"
                 HorizontalTextAlignment="Center"
                 Text="Are you sure you want to leave the room?"
                 TextColor="#555" />
 
-			<!--  Buttons: cancel or confirm leaving the room  -->
-			<Grid
-                Margin="0,8,0,0"
+            <!--  Buttons: cancel or confirm leaving the room  -->
+            <Grid
+                Margin="{OnIdiom Phone='0,8,0,0',
+                                 Tablet='0,12,0,0',
+                                 Desktop='0,16,0,0'}"
                 ColumnDefinitions="*,*"
-                ColumnSpacing="12">
+                ColumnSpacing="{OnIdiom Phone=12,
+                                        Tablet=18,
+                                        Desktop=22}">
 
-				<Button
+                <Button
                     BackgroundColor="Transparent"
                     BorderColor="#D0D0D0"
                     BorderWidth="1"
@@ -69,7 +89,7 @@
                     Text="Cancel"
                     TextColor="#146CFF" />
 
-				<Button
+                <Button
                     Grid.Column="1"
                     BackgroundColor="#146CFF"
                     Clicked="OnLeaveClicked"
@@ -77,8 +97,8 @@
                     MinimumHeightRequest="44"
                     Text="Yes, Leave"
                     TextColor="White" />
-			</Grid>
+            </Grid>
 
-		</VerticalStackLayout>
-	</Border>
+        </VerticalStackLayout>
+    </Border>
 </ContentView>
