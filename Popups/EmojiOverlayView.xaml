@@ -1,136 +1,181 @@
 <ContentView
-	x:Class="UsFrameApp.Popups.EmojiOverlayView"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    x:Class="UsFrameApp.Popups.EmojiOverlayView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-	<!--  FULL SCREEN ROOT  -->
-	<AbsoluteLayout
+    <!--  FULL SCREEN ROOT  -->
+    <AbsoluteLayout
         x:Name="Root"
         HorizontalOptions="Fill"
         VerticalOptions="Fill">
 
 
 
-		<!--  <AbsoluteLayout
+        <!--  <AbsoluteLayout
         x:Name="Root"
         HorizontalOptions="Fill"
         VerticalOptions="Center">
 
        Outside tap layer to close picker-->
-		<BoxView
+        <BoxView
             x:Name="OutsideTapLayer"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             BackgroundColor="Transparent"
             IsVisible="False">
-			<BoxView.GestureRecognizers>
-				<TapGestureRecognizer Tapped="OnOutsideTapped" />
-			</BoxView.GestureRecognizers>
-		</BoxView>
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOutsideTapped" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
 
-		<!--  EMOJI PICKER  -->
-		<Border
+        <!--  EMOJI PICKER  -->
+        <Border
             x:Name="Picker"
-            Margin="0,0,18,0"
+            Margin="{OnIdiom Phone='0,0,18,0',
+                             Tablet='0,0,30,0',
+                             Desktop='0,0,60,0'}"
             AbsoluteLayout.LayoutBounds="1,0.5,AutoSize,AutoSize"
             AbsoluteLayout.LayoutFlags="PositionProportional"
-            BackgroundColor="#000"
+            BackgroundColor="{StaticResource TextBlack}"
             Shadow="{x:Null}"
             StrokeShape="RoundRectangle 14"
-            WidthRequest="48">
+            Style="{StaticResource CustomBorder}"
+            WidthRequest="{OnIdiom Phone=48,
+                                   Tablet=66,
+                                   Desktop=60}">
+            <VerticalStackLayout Spacing="{OnIdiom Phone=10, Tablet=16, Desktop=20}">
 
-			<VerticalStackLayout Spacing="10">
 
-				<!--  ONE EMOJI TEMPLATE (repeat)  -->
-				<Border
+
+                <!--  ONE EMOJI TEMPLATE (repeat)  -->
+                <Border
                     BackgroundColor="#1FFFFFFF"
-                    HeightRequest="44"
+                    HeightRequest="{OnIdiom Phone=44,
+                                            Tablet=52,
+                                            Desktop=56}"
                     HorizontalOptions="Center"
                     StrokeShape="RoundRectangle 999"
-                    WidthRequest="44">
+                    Style="{StaticResource CustomBorder}"
+                    WidthRequest="{OnIdiom Phone=44,
+                                           Tablet=52,
+                                           Desktop=56}">
 
-					<Label
-                        FontSize="24"
+                    <Label
+                        FontSize="{OnIdiom Phone=24,
+                                           Tablet=38,
+                                           Desktop=32}"
                         HorizontalTextAlignment="Center"
                         Text="❤️"
                         VerticalTextAlignment="Center">
-						<Label.GestureRecognizers>
-							<TapGestureRecognizer Tapped="OnEmojiTapped" />
-						</Label.GestureRecognizers>
-					</Label>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmojiTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
 
-				</Border>
+                </Border>
 
-				<Border
+                <Border
                     BackgroundColor="#1FFFFFFF"
-                    HeightRequest="44"
+                    HeightRequest="{OnIdiom Phone=44,
+                                            Tablet=52,
+                                            Desktop=56}"
                     HorizontalOptions="Center"
                     StrokeShape="RoundRectangle 999"
-                    WidthRequest="44">
-					<Label
-                        FontSize="24"
+                    Style="{StaticResource CustomBorder}"
+                    WidthRequest="{OnIdiom Phone=44,
+                                           Tablet=52,
+                                           Desktop=56}">
+
+                    <Label
+                        FontSize="{OnIdiom Phone=24,
+                                           Tablet=38,
+                                           Desktop=32}"
                         HorizontalTextAlignment="Center"
                         Text="👍"
                         VerticalTextAlignment="Center">
-						<Label.GestureRecognizers>
-							<TapGestureRecognizer Tapped="OnEmojiTapped" />
-						</Label.GestureRecognizers>
-					</Label>
-				</Border>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmojiTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
 
-				<Border
+                <Border
                     BackgroundColor="#1FFFFFFF"
-                    HeightRequest="44"
+                    HeightRequest="{OnIdiom Phone=44,
+                                            Tablet=52,
+                                            Desktop=56}"
                     HorizontalOptions="Center"
                     StrokeShape="RoundRectangle 999"
-                    WidthRequest="44">
-					<Label
-                        FontSize="24"
+                    Style="{StaticResource CustomBorder}"
+                    WidthRequest="{OnIdiom Phone=44,
+                                           Tablet=52,
+                                           Desktop=56}">
+
+                    <Label
+                        FontSize="{OnIdiom Phone=24,
+                                           Tablet=38,
+                                           Desktop=32}"
                         HorizontalTextAlignment="Center"
                         Text="👎"
                         VerticalTextAlignment="Center">
-						<Label.GestureRecognizers>
-							<TapGestureRecognizer Tapped="OnEmojiTapped" />
-						</Label.GestureRecognizers>
-					</Label>
-				</Border>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmojiTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
 
-				<Border
+                <Border
                     BackgroundColor="#1FFFFFFF"
-                    HeightRequest="44"
+                    HeightRequest="{OnIdiom Phone=44,
+                                            Tablet=52,
+                                            Desktop=56}"
                     HorizontalOptions="Center"
                     StrokeShape="RoundRectangle 999"
-                    WidthRequest="44">
-					<Label
-                        FontSize="24"
+                    Style="{StaticResource CustomBorder}"
+                    WidthRequest="{OnIdiom Phone=44,
+                                           Tablet=52,
+                                           Desktop=56}">
+
+                    <Label
+                        FontSize="{OnIdiom Phone=24,
+                                           Tablet=38,
+                                           Desktop=32}"
                         HorizontalTextAlignment="Center"
                         Text="😊"
                         VerticalTextAlignment="Center">
-						<Label.GestureRecognizers>
-							<TapGestureRecognizer Tapped="OnEmojiTapped" />
-						</Label.GestureRecognizers>
-					</Label>
-				</Border>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmojiTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
 
-				<Border
+                <Border
                     BackgroundColor="#1FFFFFFF"
-                    HeightRequest="44"
+                    HeightRequest="{OnIdiom Phone=44,
+                                            Tablet=52,
+                                            Desktop=56}"
                     HorizontalOptions="Center"
                     StrokeShape="RoundRectangle 999"
-                    WidthRequest="44">
-					<Label
-                        FontSize="24"
+                    Style="{StaticResource CustomBorder}"
+                    WidthRequest="{OnIdiom Phone=44,
+                                           Tablet=52,
+                                           Desktop=56}">
+
+                    <Label
+                        FontSize="{OnIdiom Phone=24,
+                                           Tablet=38,
+                                           Desktop=32}"
                         HorizontalTextAlignment="Center"
                         Text="👏"
                         VerticalTextAlignment="Center">
-						<Label.GestureRecognizers>
-							<TapGestureRecognizer Tapped="OnEmojiTapped" />
-						</Label.GestureRecognizers>
-					</Label>
-				</Border>
-			</VerticalStackLayout>
-		</Border>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmojiTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+            </VerticalStackLayout>
+        </Border>
 
-	</AbsoluteLayout>
+    </AbsoluteLayout>
 
 </ContentView>

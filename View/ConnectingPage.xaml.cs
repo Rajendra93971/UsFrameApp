@@ -374,7 +374,7 @@ public partial class ConnectingPage : ContentPage, INotifyPropertyChanged
                 return;
 
             var roomVm = App.Services.GetRequiredService<RoomViewModel>();
-            await roomVm.InitializeAsync(_roomKey);
+            //await roomVm.InitializeAsync(_roomKey);
             await nav.PushAsync(new RoomPage(roomVm));
         });
     }

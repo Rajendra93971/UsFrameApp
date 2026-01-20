@@ -39,6 +39,7 @@
                     StrokeShape="{OnIdiom Phone='RoundRectangle 18',
                                           Tablet='RoundRectangle 36',
                                           Desktop='RoundRectangle 54'}"
+                    Style="{StaticResource CustomBorder}"
                     WidthRequest="{OnIdiom Phone=40,
                                            Tablet=80,
                                            Desktop=120}">
@@ -48,7 +49,7 @@
                     </Border.GestureRecognizers>
 
                     <Image
-                        HeightRequest="{OnIdiom Phone=36,
+                        HeightRequest="{OnIdiom Phone=25,
                                                 Tablet=48,
                                                 Desktop=420}"
                         HorizontalOptions="Center"
@@ -61,7 +62,7 @@
                 </Border>
             </Grid>
             <Label
-                Margin="{OnIdiom Phone='16',
+                Margin="{OnIdiom Phone='16,0',
                                  Tablet='20,0',
                                  Desktop='32'}"
                 FontAttributes="Bold"
@@ -79,16 +80,17 @@
                 BackgroundColor="{StaticResource Transparent}"
                 StrokeShape="{OnIdiom Phone='RoundRectangle 8',
                                       Tablet='RoundRectangle 12',
-                                      Desktop='RoundRectangle 16'}">
+                                      Desktop='RoundRectangle 16'}"
+                Style="{StaticResource CustomBorder}">
 
                 <Grid ColumnDefinitions="*,Auto" HeightRequest="{OnIdiom Phone=44, Tablet=64, Desktop=88}">
 
                     <!--  Link  -->
                     <Border
-                        Margin="{OnIdiom Phone='8,0,0,0',
-                                         Tablet='16,0',
+                        Margin="{OnIdiom Phone='0,0,8,0',
+                                         Tablet='0,0,16,0',
                                          Desktop='16,0,0,0'}"
-                        Padding="{OnIdiom Phone='0',
+                        Padding="{OnIdiom Phone='8,0',
                                           Tablet='16,0',
                                           Desktop='16,0,0,0'}"
                         Stroke="{StaticResource BorderLightGray}"
@@ -134,6 +136,7 @@
                         StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                               Tablet='RoundRectangle 20',
                                               Desktop='RoundRectangle 22'}"
+                        Style="{StaticResource CustomBorder}"
                         WidthRequest="{OnIdiom Phone=44,
                                                Tablet=68,
                                                Desktop=88}">
@@ -166,7 +169,7 @@
             <Grid>
 
                 <!--  WebRTC WebView  -->
-                <Border StrokeShape="RoundRectangle 16">
+                <Border StrokeShape="RoundRectangle 16" Style="{StaticResource CustomBorder}">
                     <WebView
                         x:Name="WebRtcWebView"
                         HorizontalOptions="Fill"
@@ -186,6 +189,7 @@
                     StrokeShape="{OnIdiom Phone='RoundRectangle 6',
                                           Tablet='RoundRectangle 10',
                                           Desktop='RoundRectangle 14'}"
+                    Style="{StaticResource CustomBorder}"
                     VerticalOptions="Start">
 
 
@@ -212,7 +216,6 @@
                 </Border>
 
                 <!--  Emoji Icon  -->
-
                 <Grid
                     x:Name="RootGrid"
                     HeightRequest="{OnIdiom Phone=64,
@@ -243,6 +246,7 @@
                         StrokeShape="{OnIdiom Phone='RoundRectangle 18',
                                               Tablet='RoundRectangle 27',
                                               Desktop='RoundRectangle 36'}"
+                        Style="{StaticResource CustomBorder}"
                         VerticalOptions="Center"
                         WidthRequest="{OnIdiom Phone=38,
                                                Tablet=54,
@@ -277,7 +281,8 @@
             Padding="{OnIdiom Phone='12,12,12,0',
                               Tablet='16,16,16,0',
                               Desktop='20,20,20,0'}"
-            BackgroundColor="{StaticResource FooterBg}">
+            BackgroundColor="{StaticResource FooterBg}"
+            Style="{StaticResource CustomBorder}">
 
             <VerticalStackLayout>
 
@@ -288,7 +293,7 @@
                                       Desktop='12,0,0,0'}"
                     ColumnDefinitions="Auto,Auto"
                     ColumnSpacing="{OnIdiom Phone=48,
-                                            Tablet=64,
+                                            Tablet=124,
                                             Desktop=80}">
 
                     <Label
@@ -297,7 +302,7 @@
                                           Desktop='20,0,0,8'}"
                         FontAttributes="Bold"
                         FontSize="{OnIdiom Phone=16,
-                                           Tablet=20,
+                                           Tablet=26,
                                            Desktop=24}"
                         Text="Local"
                         TextColor="{StaticResource TextBlack}" />
@@ -305,28 +310,28 @@
                     <Label
                         Grid.Column="1"
                         Margin="{OnIdiom Phone='28,0',
-                                         Tablet='36,0',
+                                         Tablet='76,0',
                                          Desktop='44,0'}"
                         FontAttributes="Bold"
                         FontSize="{OnIdiom Phone=16,
-                                           Tablet=20,
+                                           Tablet=26,
                                            Desktop=24}"
                         Text="Remote"
                         TextColor="{StaticResource TextBlack}" />
                 </Grid>
 
                 <!--  Buttons grid  -->
-                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="{OnIdiom Phone=30, Tablet=40, Desktop=56}">
+                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="{OnIdiom Phone=30, Tablet=110, Desktop=56}">
 
                     <!--  Local  -->
                     <Grid
                         Grid.Column="0"
                         Padding="{OnIdiom Phone='12,0,0,0',
-                                          Tablet='16,0,0,0',
+                                          Tablet='16,0',
                                           Desktop='20,0,0,0'}"
                         ColumnDefinitions="Auto,Auto"
                         ColumnSpacing="{OnIdiom Phone=6,
-                                                Tablet=10,
+                                                Tablet=30,
                                                 Desktop=14}">
 
                         <!--  Mic  -->
@@ -339,6 +344,7 @@
                             StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                                   Tablet='RoundRectangle 14',
                                                   Desktop='RoundRectangle 18'}"
+                            Style="{StaticResource CustomBorder}"
                             WidthRequest="{OnIdiom Phone=40,
                                                    Tablet=56,
                                                    Desktop=72}">
@@ -386,6 +392,7 @@
                             StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                                   Tablet='RoundRectangle 14',
                                                   Desktop='RoundRectangle 18'}"
+                            Style="{StaticResource CustomBorder}"
                             WidthRequest="{OnIdiom Phone=40,
                                                    Tablet=56,
                                                    Desktop=72}">
@@ -428,7 +435,7 @@
                         Grid.Column="1"
                         ColumnDefinitions="Auto,Auto"
                         ColumnSpacing="{OnIdiom Phone=6,
-                                                Tablet=10,
+                                                Tablet=30,
                                                 Desktop=14}">
 
                         <Border
@@ -439,6 +446,7 @@
                             StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                                   Tablet='RoundRectangle 14',
                                                   Desktop='RoundRectangle 18'}"
+                            Style="{StaticResource CustomBorder}"
                             WidthRequest="{OnIdiom Phone=40,
                                                    Tablet=56,
                                                    Desktop=72}">
@@ -460,6 +468,7 @@
                             StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                                   Tablet='RoundRectangle 14',
                                                   Desktop='RoundRectangle 18'}"
+                            Style="{StaticResource CustomBorder}"
                             WidthRequest="{OnIdiom Phone=40,
                                                    Tablet=56,
                                                    Desktop=72}">
@@ -478,7 +487,7 @@
                         Grid.Column="2"
                         ColumnDefinitions="Auto,Auto"
                         ColumnSpacing="{OnIdiom Phone=6,
-                                                Tablet=10,
+                                                Tablet=30,
                                                 Desktop=14}">
 
                         <!--  Camera Switch  -->
@@ -491,6 +500,7 @@
                             StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                                   Tablet='RoundRectangle 14',
                                                   Desktop='RoundRectangle 18'}"
+                            Style="{StaticResource CustomBorder}"
                             WidthRequest="{OnIdiom Phone=40,
                                                    Tablet=56,
                                                    Desktop=72}">
@@ -505,7 +515,7 @@
                                                         Desktop=52}"
                                 HorizontalOptions="Center"
                                 InputTransparent="True"
-                                Source="camera_flip.svg"
+                                Source="camraswitch.svg"
                                 VerticalOptions="Center" />
                         </Border>
 
@@ -520,6 +530,7 @@
                             StrokeShape="{OnIdiom Phone='RoundRectangle 10',
                                                   Tablet='RoundRectangle 14',
                                                   Desktop='RoundRectangle 18'}"
+                            Style="{StaticResource CustomBorder}"
                             WidthRequest="{OnIdiom Phone=40,
                                                    Tablet=56,
                                                    Desktop=72}">

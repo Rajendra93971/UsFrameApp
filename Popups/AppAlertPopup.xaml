@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolkit:Popup
-	x:Class="UsFrameApp.Popups.AppAlertPopup"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-	Color="Transparent">
+    x:Class="UsFrameApp.Popups.AppAlertPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Color="Transparent">
 
-	<!--  fullscreen overlay  -->
-	<Grid
-		ColumnDefinitions="*,Auto"
-		HorizontalOptions="Fill"
-		VerticalOptions="Fill">
+    <!--  fullscreen overlay  -->
+    <Grid
+        ColumnDefinitions="*,Auto"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
 
-		<!--  alert card  -->
-		<Border
-			x:Name="AlertBorder"
-			Grid.ColumnSpan="2"
-			Padding="20"
-			BackgroundColor="White"
-			HorizontalOptions="Center"
-			Shadow="{x:Null}"
-			Stroke="Transparent"
-			StrokeShape="RoundRectangle 14"
-			VerticalOptions="Center"
-			WidthRequest="280">
+        <!--  alert card  -->
+        <Border
+            x:Name="AlertBorder"
+            Grid.ColumnSpan="2"
+            Padding="{OnIdiom Phone=20,
+                              Tablet=28,
+                              Desktop=36}"
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            Shadow="{x:Null}"
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 14"
+            Style="{StaticResource CustomBorder}"
+            VerticalOptions="Center"
+            WidthRequest="{OnIdiom Phone=280,
+                                   Tablet=360,
+                                   Desktop=420}">
 
-			<VerticalStackLayout Spacing="14">
+            <VerticalStackLayout Spacing="{OnIdiom Phone=14, Tablet=20, Desktop=24}">
 
-				<!--  title  -->
-				<Label
-					x:Name="TitleLabel"
-					FontAttributes="Bold"
-					FontSize="17"
-					HorizontalTextAlignment="Center"
-					TextColor="#000" />
+                <!--  title  -->
+                <Label
+                    x:Name="TitleLabel"
+                    FontAttributes="Bold"
+                    FontSize="{OnIdiom Phone=17,
+                                       Tablet=20,
+                                       Desktop=22}"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#000" />
 
-				<!--  message  -->
-				<Label
-					x:Name="MessageLabel"
-					FontSize="16"
-					HorizontalTextAlignment="Center"
-					TextColor="#555" />
+                <!--  message  -->
+                <Label
+                    x:Name="MessageLabel"
+                    FontSize="{OnIdiom Phone=16,
+                                       Tablet=19,
+                                       Desktop=21}"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#555" />
 
-				<!--  ok action  -->
-				<Button
-					x:Name="OkButton"
-					BackgroundColor="#146CFF"
-					Clicked="OnOkClicked"
-					CornerRadius="8"
-					HeightRequest="40"
-					Text="OK"
-					TextColor="White" />
+                <!--  ok action  -->
+                <Button
+                    x:Name="OkButton"
+                    BackgroundColor="#146CFF"
+                    Clicked="OnOkClicked"
+                    CornerRadius="{OnIdiom Phone=8,
+                                           Tablet=12,
+                                           Desktop=14}"
+                    HeightRequest="{OnIdiom Phone=40,
+                                            Tablet=48,
+                                            Desktop=52}"
+                    Text="OK"
+                    TextColor="White" />
 
-			</VerticalStackLayout>
-		</Border>
-	</Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </toolkit:Popup>
