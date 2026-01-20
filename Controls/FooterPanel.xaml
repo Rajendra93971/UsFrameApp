@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+	x:Class="UsFrameApp.Controls.FooterPanel"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	BackgroundColor="Transparent">
+	<Border
+		Padding="12"
+		BackgroundColor="#F6F7FB"
+		StrokeShape="RoundRectangle 12">
+		<VerticalStackLayout Spacing="12">
+
+			<Grid
+				Padding="0,0,0,0"
+				ColumnDefinitions="Auto,Auto"
+				ColumnSpacing="24">
+				<Label
+					FontAttributes="Bold"
+					HorizontalOptions="Start"
+					Text="Local" />
+				<Label
+					FontAttributes="Bold"
+					HorizontalOptions="Center"
+					Text="Remote" />
+			</Grid>
+
+			<Grid
+				ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
+				ColumnSpacing="12"
+				HorizontalOptions="Fill">
+				<!--  Local mic  -->
+				<Border
+					x:Name="LocalMicBorder"
+					BackgroundColor="#146CFF"
+					HeightRequest="48"
+					HorizontalOptions="Start"
+					StrokeShape="RoundRectangle 12"
+					WidthRequest="48">
+					<Border.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnLocalMicTapped" />
+					</Border.GestureRecognizers>
+					<Image
+						HeightRequest="20"
+						HorizontalOptions="Center"
+						Source="m_mic.svg"
+						VerticalOptions="Center" />
+				</Border>
+
+				<!--  Local camera  -->
+				<Border
+					x:Name="LocalVideoBorder"
+					BackgroundColor="#146CFF"
+					HeightRequest="48"
+					StrokeShape="RoundRectangle 12"
+					WidthRequest="48">
+					<Border.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnLocalVideoTapped" />
+					</Border.GestureRecognizers>
+					<Image
+						HeightRequest="20"
+						HorizontalOptions="Center"
+						Source="m_video.svg"
+						VerticalOptions="Center" />
+				</Border>
+
+				<!--  Remote mic  -->
+				<Border
+					x:Name="RemoteMicBorder"
+					BackgroundColor="#146CFF"
+					HeightRequest="48"
+					StrokeShape="RoundRectangle 12"
+					WidthRequest="48">
+					<Border.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnRemoteMicTapped" />
+					</Border.GestureRecognizers>
+					<Image
+						HeightRequest="20"
+						HorizontalOptions="Center"
+						Source="m_mic.svg"
+						VerticalOptions="Center" />
+				</Border>
+
+				<!--  Remote camera  -->
+				<Border
+					x:Name="RemoteVideoBorder"
+					BackgroundColor="#146CFF"
+					HeightRequest="48"
+					StrokeShape="RoundRectangle 12"
+					WidthRequest="48">
+					<Border.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnRemoteVideoTapped" />
+					</Border.GestureRecognizers>
+					<Image
+						HeightRequest="20"
+						HorizontalOptions="Center"
+						Source="m_video.svg"
+						VerticalOptions="Center" />
+				</Border>
+
+				<!--  Speaker & Leave  -->
+				<Border
+					x:Name="SpeakerBorder"
+					BackgroundColor="#EEF2FF"
+					HeightRequest="48"
+					HorizontalOptions="End"
+					StrokeShape="RoundRectangle 12"
+					WidthRequest="48">
+					<Border.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnSpeakerTapped" />
+					</Border.GestureRecognizers>
+					<Image
+						HeightRequest="18"
+						HorizontalOptions="Center"
+						Source="m_speaker.svg"
+						VerticalOptions="Center" />
+				</Border>
+			</Grid>
+
+			<Button
+				x:Name="LeaveButton"
+				BackgroundColor="#FF1B1B"
+				Clicked="OnLeaveClicked"
+				CornerRadius="12"
+				HeightRequest="48"
+				Text="Leave Room"
+				TextColor="White" />
+		</VerticalStackLayout>
+	</Border>
+</ContentView>

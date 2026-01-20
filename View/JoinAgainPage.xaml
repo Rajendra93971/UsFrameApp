@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	x:Class="UsFrameApp.View.JoinAgainPage"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	BackgroundColor="#FFFFFF"
+	Shell.NavBarIsVisible="False">
+
+	<!--  Main Grid  -->
+	<Grid Padding="16" RowDefinitions="Auto,0.8*,1.2*">
+
+		<!--  Header  -->
+		<HorizontalStackLayout
+			Grid.Row="0"
+			Margin="0,12,0,0"
+			Spacing="8"
+			VerticalOptions="Start">
+
+			<Image
+				HeightRequest="36"
+				Source="logo.svg"
+				WidthRequest="36" />
+
+			<Label
+				FontAttributes="Bold"
+				FontSize="28"
+				Text="UsFrame"
+				TextColor="#000000"
+				VerticalTextAlignment="Center" />
+		</HorizontalStackLayout>
+
+		<!--  Content (Top-Center)  -->
+
+		<VerticalStackLayout
+			Grid.Row="1"
+			HorizontalOptions="Fill"
+			Spacing="24"
+			VerticalOptions="Center">
+
+			<Label
+				FontSize="24"
+				HorizontalTextAlignment="Center"
+				Text="You left the room"
+				TextColor="#000000" />
+			<Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+
+				<Button
+					BackgroundColor="Transparent"
+					BorderColor="#E0E0E0"
+					BorderWidth="1"
+					Clicked="OnJoinAgainClicked"
+					CornerRadius="24"
+					HeightRequest="48"
+					HorizontalOptions="Fill"
+					Text="Join Again"
+					TextColor="#146CFF" />
+
+				<Button
+					Grid.Column="1"
+					BackgroundColor="#146CFF"
+					Clicked="OnBackToHomeClicked"
+					CornerRadius="24"
+					HeightRequest="48"
+					HorizontalOptions="Fill"
+					Text="Back to Homepage"
+					TextColor="#FFFFFF" />
+
+			</Grid>
+		</VerticalStackLayout>
+	</Grid>
+</ContentPage>

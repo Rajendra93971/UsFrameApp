@@ -1,0 +1,136 @@
+<ContentView
+	x:Class="UsFrameApp.Popups.EmojiOverlayView"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+	<!--  FULL SCREEN ROOT  -->
+	<AbsoluteLayout
+        x:Name="Root"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+
+
+
+		<!--  <AbsoluteLayout
+        x:Name="Root"
+        HorizontalOptions="Fill"
+        VerticalOptions="Center">
+
+       Outside tap layer to close picker-->
+		<BoxView
+            x:Name="OutsideTapLayer"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="Transparent"
+            IsVisible="False">
+			<BoxView.GestureRecognizers>
+				<TapGestureRecognizer Tapped="OnOutsideTapped" />
+			</BoxView.GestureRecognizers>
+		</BoxView>
+
+		<!--  EMOJI PICKER  -->
+		<Border
+            x:Name="Picker"
+            Margin="0,0,18,0"
+            AbsoluteLayout.LayoutBounds="1,0.5,AutoSize,AutoSize"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            BackgroundColor="#000"
+            Shadow="{x:Null}"
+            StrokeShape="RoundRectangle 14"
+            WidthRequest="48">
+
+			<VerticalStackLayout Spacing="10">
+
+				<!--  ONE EMOJI TEMPLATE (repeat)  -->
+				<Border
+                    BackgroundColor="#1FFFFFFF"
+                    HeightRequest="44"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 999"
+                    WidthRequest="44">
+
+					<Label
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="❤️"
+                        VerticalTextAlignment="Center">
+						<Label.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnEmojiTapped" />
+						</Label.GestureRecognizers>
+					</Label>
+
+				</Border>
+
+				<Border
+                    BackgroundColor="#1FFFFFFF"
+                    HeightRequest="44"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 999"
+                    WidthRequest="44">
+					<Label
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="👍"
+                        VerticalTextAlignment="Center">
+						<Label.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnEmojiTapped" />
+						</Label.GestureRecognizers>
+					</Label>
+				</Border>
+
+				<Border
+                    BackgroundColor="#1FFFFFFF"
+                    HeightRequest="44"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 999"
+                    WidthRequest="44">
+					<Label
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="👎"
+                        VerticalTextAlignment="Center">
+						<Label.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnEmojiTapped" />
+						</Label.GestureRecognizers>
+					</Label>
+				</Border>
+
+				<Border
+                    BackgroundColor="#1FFFFFFF"
+                    HeightRequest="44"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 999"
+                    WidthRequest="44">
+					<Label
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="😊"
+                        VerticalTextAlignment="Center">
+						<Label.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnEmojiTapped" />
+						</Label.GestureRecognizers>
+					</Label>
+				</Border>
+
+				<Border
+                    BackgroundColor="#1FFFFFFF"
+                    HeightRequest="44"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 999"
+                    WidthRequest="44">
+					<Label
+                        FontSize="24"
+                        HorizontalTextAlignment="Center"
+                        Text="👏"
+                        VerticalTextAlignment="Center">
+						<Label.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnEmojiTapped" />
+						</Label.GestureRecognizers>
+					</Label>
+				</Border>
+			</VerticalStackLayout>
+		</Border>
+
+	</AbsoluteLayout>
+
+</ContentView>

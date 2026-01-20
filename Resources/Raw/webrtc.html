@@ -1,0 +1,519 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>UsFrame WebRTC</title>
+
+    <style>
+        /* fullscreen black background */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        #videoContainer {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        /* remote user video fullscreen */
+        #remoteVideo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: black;
+        }
+
+        /* local camera preview (pip) */
+        #localVideo {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 30vw;
+            max-width: 140px;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #fff;
+            background: black;
+            z-index: 10;
+        }
+        /* Mobile optimization */
+        @media (max-width: 600px) {
+            #localVideo {
+                width: 35vw;
+                max-width: 120px;
+                bottom: 12px;
+                right: 12px;
+            }
+            /* video layout modes */
+            .video-contain {
+                object-fit: contain;
+            }
+
+            .video-cover {
+                object-fit: cover;
+            }
+            /* Waiting Overlay */
+            #waitingOverlay {
+                position: absolute;
+                inset: 0;
+                background: #2b3142;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 5;
+            }
+
+            .waitingContent {
+                text-align: center;
+                color: #cfd6e4;
+                font-family: system-ui, -apple-system, sans-serif;
+            }
+
+            .waitingText {
+                margin-bottom: 18px;
+                font-size: 16px;
+                font-weight: 500;
+                opacity: 0.9;
+            }
+            /* debug overlay */
+            #debugPanel {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: #fff;
+                color: #000;
+                padding: 10px;
+                border-radius: 8px;
+                font-size: 12px;
+                display: none;
+                z-index: 9999;
+                max-width: 220px;
+            }
+
+            /* smaller size on small screens */
+            @media (max-width: 600px) {
+                #localVideo {
+                    width: 35vw;
+                    max-width: 120px;
+                    bottom: 12px;
+                    right: 12px;
+                }
+            }
+        }
+        /* Spinner */
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #ffffff;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        /* Local Video Overlay Container */
+        #localVideoOverlay {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 30vw;
+            max-width: 140px;
+            aspect-ratio: 3 / 4;
+            pointer-events: none;
+            z-index: 11;
+        }
+
+        /* label */
+        #localLabel {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Center status text (Mic Muted / Video Off) */
+        #localStatusText {
+            position: absolute;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        #localStatusText {
+            transition: opacity 0.15s ease;
+        }
+    </style>
+    <!-- signalr client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+</head>
+
+<body>
+
+    <!--for spinner-->
+    <div id="waitingOverlay">
+        <div class="waitingContent">
+            <div class="waitingText">Waiting for another person...</div>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- remote video element -->
+    <video id="remoteVideo" autoplay playsinline class="video-contain"></video>
+
+    <!-- local preview (initially hidden unless self view enabled) -->
+    <video id="localVideo" autoplay muted playsinline style="display:none"></video>
+
+    <!-- debug panel -->
+    <div id="debugPanel">
+        <div id="debugLogs"></div>
+    </div>
+
+    <script>
+
+        window.__videoOff = false;
+
+        // signalr + webrtc state
+        let connection = null;
+        let peerConnection = null;
+        let localStream = null;
+        let roomKey = null;
+        let isMediaStarted = false;
+
+        // camera facing mode state
+        let currentFacing = "user";
+
+        // ui states coming from maui
+        let isDebugEnabled = false;
+        let isVideoExpanded = false;
+
+        // enable / disable debug ui
+        function setDebugMode(enabled) {
+            isDebugEnabled = enabled;
+            const panel = document.getElementById("debugPanel");
+            if (panel) {
+                panel.style.display = enabled ? "block" : "none";
+            }
+        }
+
+        function debugLog(text) {
+            if (!isDebugEnabled) return;
+            const logs = document.getElementById("debugLogs");
+            if (!logs) return;
+            const div = document.createElement("div");
+            div.innerText = text;
+            logs.appendChild(div);
+        }
+
+        function setExpandVideo(expand) {
+            isVideoExpanded = expand;
+            const video = document.getElementById("remoteVideo");
+            if (!video) return;
+            video.className = expand ? "video-cover" : "video-contain";
+        }
+
+        // entry point from maui
+        async function startCall(rKey, selfViewEnabled) {
+            roomKey = rKey;
+
+            try {
+                // start signalr first
+                await initSignalR();
+
+                // if self view requested, start local media
+                if (selfViewEnabled) {
+                    await ensureLocalMedia();
+                }
+            } catch (e) {
+                window.location.href = "app://" + encodeURIComponent(JSON.stringify({
+                    type: "error",
+                    message: e.message || String(e)
+                }));
+            }
+        }
+
+        async function ensureLocalMedia() {
+            if (localStream) return;
+
+            localStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: currentFacing },
+                audio: true
+            });
+
+            const lv = document.getElementById("localVideo");
+            if (lv) {
+                lv.srcObject = localStream;
+                lv.style.display = "block";
+            }
+
+            if (peerConnection) {
+                // add tracks to peer connection
+                localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+            }
+        }
+
+        /* setup signalr connection */
+        async function initSignalR() {
+            if (connection) return;
+
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://usframe.com/meeting")
+                .withAutomaticReconnect()
+                .build();
+
+            registerSignalREvents();
+
+            await connection.start();
+            debugLog("signalr connected: " + connection.connectionId);
+
+            await connection.invoke("JoinRoom", roomKey, connection.connectionId);
+        }
+
+        /* signalr event handlers */
+        function registerSignalREvents() {
+
+            connection.on("TwoUsersConnected", async () => {
+                debugLog("two users connected");
+                if (!isMediaStarted) {
+                    await initMedia();
+                    isMediaStarted = true;
+                }
+                createOffer();
+            });
+
+            connection.on("UserJoined", async () => {
+                debugLog("user joined");
+                if (!isMediaStarted) {
+                    await initMedia();
+                    isMediaStarted = true;
+                }
+                createOffer();
+            });
+
+            connection.on("ReceiveOffer", async (sdp) => {
+                debugLog("offer received");
+                await peerConnection.setRemoteDescription({ type: "offer", sdp });
+                const answer = await peerConnection.createAnswer();
+                await peerConnection.setLocalDescription(answer);
+                await connection.invoke("SendAnswer", roomKey, answer.sdp);
+            });
+
+            connection.on("ReceiveAnswer", async (sdp) => {
+                debugLog("answer received");
+                await peerConnection.setRemoteDescription({ type: "answer", sdp });
+            });
+
+            connection.on("ReceiveIceCandidate", async (candidate) => {
+                await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+            });
+
+            connection.on("RoomClosed", endCall);
+        }
+
+        const iceServers = {
+            iceServers: [
+                { urls: "stun:stun.l.google.com:19302" },
+                { urls: "stun:stun1.l.google.com:19302" }
+            ]
+        };
+
+        async function initMedia() {
+            if (peerConnection) return;
+
+            peerConnection = new RTCPeerConnection(iceServers);
+
+            peerConnection.ontrack = e => {
+                document.getElementById("remoteVideo").srcObject = e.streams[0];
+            };
+
+            peerConnection.onicecandidate = e => {
+                if (e.candidate) {
+                    connection.invoke("SendIceCandidate", roomKey, e.candidate);
+                }
+            };
+
+            // if local stream present, add tracks
+            if (localStream) {
+                localStream.getTracks().forEach(track =>
+                    peerConnection.addTrack(track, localStream)
+                );
+            }
+        }
+
+        async function createOffer() {
+            const offer = await peerConnection.createOffer();
+            await peerConnection.setLocalDescription(offer);
+            await connection.invoke("SendOffer", roomKey, offer.sdp);
+        }
+
+        function toggleCamera(isOff) {
+            if (!localStream) return;
+
+            window.__videoOff = isOff;
+            localStream.getVideoTracks().forEach(t => t.enabled = !isOff);
+
+            const status = document.getElementById("localStatusText");
+            if (!status) return;
+
+            if (isOff) {
+                status.textContent = "Video Off";
+                status.style.display = "flex";
+                status.style.background = "rgba(128,128,128,0.6)";
+            } else {
+                status.style.display = "none";
+            }
+        }
+
+        function toggleMic(isMuted) {
+            if (!localStream) return;
+
+            localStream.getAudioTracks().forEach(t => t.enabled = !isMuted);
+
+            const status = document.getElementById("localStatusText");
+            if (!status) return;
+
+            if (isMuted) {
+                status.textContent = "Muted";
+                status.style.display = "flex";
+                status.style.background = "transparent";
+            } else if (!window.__videoOff) {
+                status.style.display = "none";  
+            }
+        }
+
+        async function setSelfViewEnabled(enabled) {
+            try {
+                if (enabled) {
+                    await ensureLocalMedia();
+                } else {
+                    // disable: stop tracks and hide preview
+                    if (localStream) {
+                        localStream.getTracks().forEach(t => {
+                            try { t.stop(); } catch { }
+                        });
+                        localStream = null;
+                    }
+                    const lv = document.getElementById("localVideo");
+                    if (lv) {
+                        lv.srcObject = null;
+                        lv.style.display = "none";
+                    }
+                    if (peerConnection) {
+                        peerConnection.getSenders().forEach(sender => {
+                            if (sender.track && sender.track.kind === 'video') {
+                                try { sender.replaceTrack(null); } catch { }
+                            }
+                            if (sender.track && sender.track.kind === 'audio') {
+                                try { sender.replaceTrack(null); } catch { }
+                            }
+                        });
+                    }
+                }
+            } catch (ex) {
+                debugLog("setSelfViewEnabled error: " + ex);
+            }
+        }
+
+        async function switchCamera() {
+            // toggle facing mode
+            currentFacing = (currentFacing === "user") ? "environment" : "user";
+
+            if (!localStream) {
+                return;
+            }
+
+            try {
+                // stop the existing video track
+                const oldVideoTrack = localStream.getVideoTracks()[0];
+                if (oldVideoTrack) {
+                    try { oldVideoTrack.stop(); } catch {}
+                }
+
+                const newStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: currentFacing },
+                    audio: false
+                });
+
+                const newVideoTrack = newStream.getVideoTracks()[0];
+                if (!newVideoTrack) return;
+
+                // replace track in localStream
+                localStream.getVideoTracks().forEach(t => {
+                    try { localStream.removeTrack(t); } catch {}
+                });
+                try { localStream.addTrack(newVideoTrack); } catch {}
+
+                // update preview
+                const lv = document.getElementById("localVideo");
+                if (lv) lv.srcObject = localStream;
+
+                // replace sender track in peerConnection
+                if (peerConnection) {
+                    const senders = peerConnection.getSenders();
+                    const videoSender = senders.find(s => s.track && s.track.kind === "video");
+                    if (videoSender && videoSender.replaceTrack) {
+                        await videoSender.replaceTrack(newVideoTrack);
+                    } else {
+                        // fallback: add track
+                        peerConnection.addTrack(newVideoTrack, localStream);
+                        createOffer();
+                    }
+                }
+            } catch (ex) {
+                debugLog("switchCamera error: " + ex);
+            }
+        }
+
+        async function endCall() {
+            peerConnection?.close();
+            await connection?.stop();
+            peerConnection = null;
+            connection = null;
+            if (localStream) {
+                localStream.getTracks().forEach(t => {
+                    try { t.stop(); } catch {}
+                });
+                localStream = null;
+            }
+        }
+
+        function pauseCall() {
+            localStream?.getTracks().forEach(t => t.enabled = false);
+        }
+
+        function resumeCall() {
+            if (localStream) {
+                localStream.getTracks().forEach(t => t.enabled = true);
+            } else if (roomKey) {
+                startCall(roomKey, true);
+            }
+        }
+
+        window.onerror = function () { return true; };
+    </script>
+
+</body>
+</html>

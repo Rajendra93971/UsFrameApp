@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+	x:Class="UsFrameApp.Popups.QrPopup"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+
+	<Border
+		x:Name="QrBorder"
+		Padding="0,20"
+		BackgroundColor="White"
+		HorizontalOptions="Center"
+		Stroke="Transparent"
+		StrokeShape="RoundRectangle 16"
+		VerticalOptions="Center"
+		WidthRequest="{OnIdiom Phone=260,
+		                       Tablet=300,
+		                       Desktop=340}">
+		<Border.Shadow>
+			<Shadow Opacity="0" />
+		</Border.Shadow>
+
+		<VerticalStackLayout HorizontalOptions="Center" Spacing="16">
+
+
+			<!--  Title: instructs user to scan the QR code to join the meeting  -->
+			<Label
+				FontAttributes="Bold"
+				FontSize="16"
+				HorizontalTextAlignment="Start"
+				Text="SCAN TO JOIN ROOM"
+				TextColor="#3A3A5A"
+				VerticalTextAlignment="Start" />
+
+			<Image
+				x:Name="QrImage"
+				Aspect="AspectFit"
+				HeightRequest="200"
+				WidthRequest="200" />
+
+		</VerticalStackLayout>
+	</Border>
+
+</toolkit:Popup>

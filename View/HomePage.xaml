@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UsFrameApp.View.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource TextWhite}"
+    NavigationPage.HasNavigationBar="False">
+
+    <!--  Root layout container  -->
+    <Grid Padding="{OnIdiom Phone={OnPlatform iOS='16,0', Android='16,0'}, Tablet={OnPlatform iOS='24,0', Android='24,0'}, Desktop='32,0'}" RowDefinitions="Auto,*,Auto">
+
+        <!--  Scrollable content  -->
+        <ScrollView
+            Grid.Row="1"
+            Orientation="Vertical"
+            VerticalScrollBarVisibility="Never">
+
+            <!--  Page content  -->
+            <VerticalStackLayout Spacing="{OnIdiom Phone='24', Desktop='40'}">
+
+
+                <!--  Header  -->
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Margin="{OnIdiom Phone='0,20',
+                                     Tablet='0,24',
+                                     Desktop='0,36'}"
+                    Spacing="{OnIdiom Phone='16',
+                                      Tablet='24',
+                                      Desktop='32'}">
+
+
+                    <!--  Logo icon  -->
+                    <Image
+                        HeightRequest="{OnIdiom Phone=36,
+                                                Tablet=62,
+                                                Desktop=80}"
+                        HorizontalOptions="Start"
+                        Source="logo.svg"
+                        WidthRequest="{OnIdiom Phone=-1,
+                                               Tablet=62,
+                                               Desktop=90}" />
+
+                    <!--  Title  -->
+                    <HorizontalStackLayout Spacing="{OnIdiom Phone='4', Tablet='8', Desktop='12'}">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="{OnIdiom Phone=26,
+                                               Tablet=32}"
+                            Text="Hi Welcome to"
+                            TextColor="{StaticResource TextBlack}" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="{OnIdiom Phone=26,
+                                               Tablet=32}"
+                            Text="UsFrame!"
+                            TextColor="{StaticResource PrimaryBlue}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!--  Main content  -->
+                <VerticalStackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Spacing="{OnIdiom Phone='22',
+                                      Tablet='26',
+                                      Desktop='32'}"
+                    WidthRequest="{OnIdiom Phone='-1',
+                                           Tablet='720',
+                                           Desktop='900'}">
+
+
+                    <!--  Video Section  -->
+                    <Grid Margin="{OnIdiom Phone='0,20', Tablet='0,24', Desktop='0,36'}" HeightRequest="{OnIdiom Phone='340', Tablet='580', Desktop='360'}">
+
+                        <Border StrokeShape="{OnIdiom Phone='RoundRectangle 14', Tablet='RoundRectangle 16', Desktop='RoundRectangle 24'}" StrokeThickness="0">
+                            <Grid>
+
+                                <!--  Main video  -->
+                                <Image
+                                    Aspect="AspectFill"
+                                    HorizontalOptions="Fill"
+                                    Source="video_preview.svg"
+                                    VerticalOptions="Fill" />
+
+                                <Border
+                                    Margin="{OnIdiom Phone='12',
+                                                     Tablet='16',
+                                                     Desktop='20'}"
+                                    Padding="{OnIdiom Phone='6',
+                                                      Tablet='8',
+                                                      Desktop='10'}"
+                                    BackgroundColor="{StaticResource TimerBg}"
+                                    HorizontalOptions="Start"
+                                    StrokeShape="{OnIdiom Phone='RoundRectangle 8',
+                                                          Tablet='RoundRectangle 10',
+                                                          Desktop='RoundRectangle 12'}"
+                                    Style="{StaticResource CustomBorder}"
+                                    VerticalOptions="Start">
+
+                                    <HorizontalStackLayout Spacing="{OnIdiom Phone='6', Tablet='8', Desktop='10'}">
+
+                                        <Image
+                                            HeightRequest="{OnIdiom Phone='16',
+                                                                    Tablet='20',
+                                                                    Desktop='24'}"
+                                            Source="clock.svg"
+                                            WidthRequest="{OnIdiom Phone='16',
+                                                                   Tablet='20',
+                                                                   Desktop='24'}" />
+
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="{OnIdiom Phone='14',
+                                                               Tablet='16',
+                                                               Desktop='18'}"
+                                            Text="{Binding StaticTimer}"
+                                            TextColor="{StaticResource TextBlack}" />
+
+                                    </HorizontalStackLayout>
+                                </Border>
+
+                                <!--  Small preview  -->
+                                <Border
+                                    Margin="{OnIdiom Phone=12,
+                                                     Tablet=16}"
+                                    HeightRequest="{OnIdiom Phone=150,
+                                                            Tablet=200}"
+                                    HorizontalOptions="End"
+                                    StrokeShape="RoundRectangle 12"
+                                    StrokeThickness="0"
+                                    VerticalOptions="End"
+                                    WidthRequest="{OnIdiom Phone=160,
+                                                           Tablet=210}">
+
+                                    <Image Aspect="AspectFill" Source="video_small.svg" />
+                                </Border>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!--  Description  -->
+                    <VerticalStackLayout HorizontalOptions="Fill" Spacing="0">
+
+                        <Label HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=29}"
+                                        Text="Try "
+                                        TextColor="{StaticResource TextBlack}" />
+
+                                    <Span
+                                        FontAttributes="Bold"
+                                        FontAutoScalingEnabled="False"
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=29}"
+                                        Text="UsFrame"
+                                        TextColor="{StaticResource PrimaryBlue}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+
+                        </Label>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="{OnIdiom Phone=14,
+                                               Tablet=29}"
+                            HorizontalTextAlignment="Center"
+                            Text="for fast, hassle-free one-on-one video calls! No installs, just a simple interface and full controls. Perfect for interviews, mentoring, or casual chats. Share the link and start chatting instantly from your browser!"
+                            TextColor="{StaticResource TextBlack}" />
+
+
+                    </VerticalStackLayout>
+
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!--  Footer  -->
+        <Border
+            Grid.Row="2"
+            Margin="{OnIdiom Phone='0,20',
+                             Tablet='0,28',
+                             Desktop='0,36'}"
+            BackgroundColor="{StaticResource PrimaryBlue}"
+            HorizontalOptions="Fill"
+            MinimumHeightRequest="{OnIdiom Phone='52',
+                                           Tablet='60',
+                                           Desktop='64'}"
+            StrokeShape="{OnIdiom Phone='RoundRectangle 14',
+                                  Tablet='RoundRectangle 18',
+                                  Desktop='RoundRectangle 22'}">
+
+
+            <Button
+                BackgroundColor="{StaticResource Transparent}"
+                Command="{Binding StartSessionCommand}"
+                FontAttributes="Bold"
+                FontSize="{OnIdiom Phone=16,
+                                   Tablet=30}"
+                Text="Start Video Session"
+                TextColor="{StaticResource TextWhite}" />
+        </Border>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UsFrameApp.View.RoomPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:overlay="clr-namespace:UsFrameApp.Popups"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    BackgroundColor="{StaticResource TextWhite}"
+    NavigationPage.HasNavigationBar="False">
+
+    <!--  Root layout container  -->
+    <Grid Padding="{OnPlatform iOS='16', Android='0'}" RowDefinitions="Auto,*,Auto">
+
+        <!--  Header  -->
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+
+            <Grid Margin="{OnIdiom Phone='16', Tablet='20', Desktop='32'}" ColumnDefinitions="Auto,*,Auto">
+
+
+
+                <!--  Logo icon  -->
+                <Image
+                    HeightRequest="{OnIdiom Phone=36,
+                                            Tablet=48,
+                                            Desktop=420}"
+                    HorizontalOptions="Start"
+                    Source="logo.svg"
+                    WidthRequest="{OnIdiom Phone=-1,
+                                           Tablet=72,
+                                           Desktop=90}" />
+
+                <!--  Setting icon  -->
+                <Border
+                    Grid.Column="2"
+                    BackgroundColor="{StaticResource HeaderIconBg}"
+                    HeightRequest="{OnIdiom Phone=40,
+                                            Tablet=80,
+                                            Desktop=120}"
+                    StrokeShape="{OnIdiom Phone='RoundRectangle 18',
+                                          Tablet='RoundRectangle 36',
+                                          Desktop='RoundRectangle 54'}"
+                    WidthRequest="{OnIdiom Phone=40,
+                                           Tablet=80,
+                                           Desktop=120}">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsClicked" />
+                    </Border.GestureRecognizers>
+
+                    <Image
+                        HeightRequest="{OnIdiom Phone=36,
+                                                Tablet=48,
+                                                Desktop=420}"
+                        HorizontalOptions="Center"
+                        InputTransparent="True"
+                        Source="m_settings.svg"
+                        VerticalOptions="Center"
+                        WidthRequest="{OnIdiom Phone=-1,
+                                               Tablet=72,
+                                               Desktop=90}" />
+                </Border>
+            </Grid>
+            <Label
+                Margin="{OnIdiom Phone='16',
+                                 Tablet='20,0',
+                                 Desktop='32'}"
+                FontAttributes="Bold"
+                FontSize="{OnIdiom Phone=26,
+                                   Tablet=40}"
+                HorizontalTextAlignment="Start"
+                Text="UsFrame!"
+                TextColor="{StaticResource PrimaryBlue}" />
+
+            <!--  RoomPage  -->
+            <Border
+                Padding="{OnIdiom Phone='8',
+                                  Tablet='16',
+                                  Desktop='16'}"
+                BackgroundColor="{StaticResource Transparent}"
+                StrokeShape="{OnIdiom Phone='RoundRectangle 8',
+                                      Tablet='RoundRectangle 12',
+                                      Desktop='RoundRectangle 16'}">
+
+                <Grid ColumnDefinitions="*,Auto" HeightRequest="{OnIdiom Phone=44, Tablet=64, Desktop=88}">
+
+                    <!--  Link  -->
+                    <Border
+                        Margin="{OnIdiom Phone='8,0,0,0',
+                                         Tablet='16,0',
+                                         Desktop='16,0,0,0'}"
+                        Padding="{OnIdiom Phone='0',
+                                          Tablet='16,0',
+                                          Desktop='16,0,0,0'}"
+                        Stroke="{StaticResource BorderLightGray}"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
+
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <Label
+                                x:Name="InfoLabel"
+                                FontSize="{OnIdiom Phone=13,
+                                                   Tablet=22,
+                                                   Desktop=26}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="1"
+                                TextColor="{StaticResource MutedTextDark}"
+                                VerticalOptions="Center" />
+
+                            <!--  Copy icon  -->
+                            <ImageButton
+                                Grid.Column="1"
+                                BackgroundColor="{StaticResource Transparent}"
+                                Clicked="OnCopyClicked"
+                                HeightRequest="{OnIdiom Phone=22,
+                                                        Tablet=58,
+                                                        Desktop=36}"
+                                Source="m_copy.svg"
+                                VerticalOptions="Center"
+                                WidthRequest="{OnIdiom Phone=20,
+                                                       Tablet=58,
+                                                       Desktop=34}" />
+
+                        </Grid>
+                    </Border>
+
+                    <!--  QR icon  -->
+                    <Border
+                        Grid.Column="1"
+                        BackgroundColor="{StaticResource PrimaryBlue}"
+                        HeightRequest="{OnIdiom Phone=44,
+                                                Tablet=64,
+                                                Desktop=88}"
+                        StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                              Tablet='RoundRectangle 20',
+                                              Desktop='RoundRectangle 22'}"
+                        WidthRequest="{OnIdiom Phone=44,
+                                               Tablet=68,
+                                               Desktop=88}">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnQrTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Image
+                            HeightRequest="{OnIdiom Phone=18,
+                                                    Tablet=28,
+                                                    Desktop=36}"
+                            HorizontalOptions="Center"
+                            Source="m_qr.svg"
+                            VerticalOptions="Center"
+                            WidthRequest="{OnIdiom Phone=18,
+                                                   Tablet=28,
+                                                   Desktop=36}" />
+
+                    </Border>
+
+                </Grid>
+            </Border>
+
+
+        </VerticalStackLayout>
+
+        <!--  Video Call Area  -->
+        <Grid Grid.Row="1" Padding="12">
+            <Grid>
+
+                <!--  WebRTC WebView  -->
+                <Border StrokeShape="RoundRectangle 16">
+                    <WebView
+                        x:Name="WebRtcWebView"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                </Border>
+
+                <!--  Timer  -->
+                <Border
+                    Margin="{OnIdiom Phone='12',
+                                     Tablet='16',
+                                     Desktop='20'}"
+                    Padding="{OnIdiom Phone='6,4',
+                                      Tablet='10,6',
+                                      Desktop='14,8'}"
+                    BackgroundColor="{StaticResource TextWhite}"
+                    HorizontalOptions="Start"
+                    StrokeShape="{OnIdiom Phone='RoundRectangle 6',
+                                          Tablet='RoundRectangle 10',
+                                          Desktop='RoundRectangle 14'}"
+                    VerticalOptions="Start">
+
+
+                    <HorizontalStackLayout Spacing="{OnIdiom Phone=6, Tablet=10, Desktop=14}">
+
+                        <Image
+                            HeightRequest="{OnIdiom Phone=16,
+                                                    Tablet=22,
+                                                    Desktop=28}"
+                            Source="clock.svg"
+                            WidthRequest="{OnIdiom Phone=16,
+                                                   Tablet=22,
+                                                   Desktop=28}" />
+
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="{OnIdiom Phone=14,
+                                               Tablet=20,
+                                               Desktop=24}"
+                            Text="00:00:00"
+                            TextColor="{StaticResource TextBlack}" />
+                    </HorizontalStackLayout>
+
+                </Border>
+
+                <!--  Emoji Icon  -->
+
+                <Grid
+                    x:Name="RootGrid"
+                    HeightRequest="{OnIdiom Phone=64,
+                                            Tablet=72,
+                                            Desktop=88}"
+                    HorizontalOptions="End"
+                    TranslationX="{OnIdiom Phone=18,
+                                           Tablet=22,
+                                           Desktop=26}"
+                    TranslationY="{OnIdiom Phone=28,
+                                           Tablet=22,
+                                           Desktop=18}"
+                    VerticalOptions="End"
+                    WidthRequest="{OnIdiom Phone=64,
+                                           Tablet=72,
+                                           Desktop=88}">
+
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnEmojiIconTapped" />
+                    </Grid.GestureRecognizers>
+                    <Border
+                        BackgroundColor="{StaticResource TextWhite}"
+                        HeightRequest="{OnIdiom Phone=38,
+                                                Tablet=54,
+                                                Desktop=72}"
+                        HorizontalOptions="Center"
+                        StrokeShape="{OnIdiom Phone='RoundRectangle 18',
+                                              Tablet='RoundRectangle 27',
+                                              Desktop='RoundRectangle 36'}"
+                        VerticalOptions="Center"
+                        WidthRequest="{OnIdiom Phone=38,
+                                               Tablet=54,
+                                               Desktop=72}">
+
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnEmojiIconTapped" />
+                        </Border.GestureRecognizers>
+
+                        <Image
+                            HeightRequest="{OnIdiom Phone=26,
+                                                    Tablet=36,
+                                                    Desktop=48}"
+                            HorizontalOptions="Center"
+                            Source="m_emoji.svg"
+                            VerticalOptions="Center"
+                            WidthRequest="{OnIdiom Phone=26,
+                                                   Tablet=36,
+                                                   Desktop=48}" />
+
+                    </Border>
+                </Grid>
+
+
+            </Grid>
+        </Grid>
+
+        <!--  Footer  -->
+        <Border
+            Grid.Row="2"
+            Padding="{OnIdiom Phone='12,12,12,0',
+                              Tablet='16,16,16,0',
+                              Desktop='20,20,20,0'}"
+            BackgroundColor="{StaticResource FooterBg}">
+
+            <VerticalStackLayout>
+
+                <!--  Header labels  -->
+                <Grid
+                    Padding="{OnIdiom Phone='5,0,0,0',
+                                      Tablet='8,0,0,0',
+                                      Desktop='12,0,0,0'}"
+                    ColumnDefinitions="Auto,Auto"
+                    ColumnSpacing="{OnIdiom Phone=48,
+                                            Tablet=64,
+                                            Desktop=80}">
+
+                    <Label
+                        Padding="{OnIdiom Phone='12,0,0,5',
+                                          Tablet='16,0,0,6',
+                                          Desktop='20,0,0,8'}"
+                        FontAttributes="Bold"
+                        FontSize="{OnIdiom Phone=16,
+                                           Tablet=20,
+                                           Desktop=24}"
+                        Text="Local"
+                        TextColor="{StaticResource TextBlack}" />
+
+                    <Label
+                        Grid.Column="1"
+                        Margin="{OnIdiom Phone='28,0',
+                                         Tablet='36,0',
+                                         Desktop='44,0'}"
+                        FontAttributes="Bold"
+                        FontSize="{OnIdiom Phone=16,
+                                           Tablet=20,
+                                           Desktop=24}"
+                        Text="Remote"
+                        TextColor="{StaticResource TextBlack}" />
+                </Grid>
+
+                <!--  Buttons grid  -->
+                <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="{OnIdiom Phone=30, Tablet=40, Desktop=56}">
+
+                    <!--  Local  -->
+                    <Grid
+                        Grid.Column="0"
+                        Padding="{OnIdiom Phone='12,0,0,0',
+                                          Tablet='16,0,0,0',
+                                          Desktop='20,0,0,0'}"
+                        ColumnDefinitions="Auto,Auto"
+                        ColumnSpacing="{OnIdiom Phone=6,
+                                                Tablet=10,
+                                                Desktop=14}">
+
+                        <!--  Mic  -->
+                        <Border
+                            x:Name="MicBorder"
+                            BackgroundColor="{StaticResource PrimaryBlue}"
+                            HeightRequest="{OnIdiom Phone=40,
+                                                    Tablet=56,
+                                                    Desktop=72}"
+                            StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                                  Tablet='RoundRectangle 14',
+                                                  Desktop='RoundRectangle 18'}"
+                            WidthRequest="{OnIdiom Phone=40,
+                                                   Tablet=56,
+                                                   Desktop=72}">
+
+                            <Grid>
+                                <Image
+                                    HeightRequest="{OnIdiom Phone=20,
+                                                            Tablet=28,
+                                                            Desktop=36}"
+                                    HorizontalOptions="Center"
+                                    Source="m_mic.svg"
+                                    VerticalOptions="Center" />
+
+                                <BoxView
+                                    x:Name="MicSlash"
+                                    Margin="{OnIdiom Phone='6,25,0,0',
+                                                     Tablet='8,34,0,0',
+                                                     Desktop='10,44,0,0'}"
+                                    BackgroundColor="{StaticResource TextWhite}"
+                                    HeightRequest="{OnIdiom Phone=2,
+                                                            Tablet=3,
+                                                            Desktop=4}"
+                                    HorizontalOptions="Center"
+                                    IsVisible="False"
+                                    Rotation="-45"
+                                    VerticalOptions="Center"
+                                    WidthRequest="{OnIdiom Phone=30,
+                                                           Tablet=42,
+                                                           Desktop=56}" />
+                            </Grid>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMicTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+
+                        <!--  Video  -->
+                        <Border
+                            x:Name="VideoBorder"
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource PrimaryBlue}"
+                            HeightRequest="{OnIdiom Phone=40,
+                                                    Tablet=56,
+                                                    Desktop=72}"
+                            StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                                  Tablet='RoundRectangle 14',
+                                                  Desktop='RoundRectangle 18'}"
+                            WidthRequest="{OnIdiom Phone=40,
+                                                   Tablet=56,
+                                                   Desktop=72}">
+
+                            <Grid>
+                                <Image
+                                    HeightRequest="{OnIdiom Phone=16,
+                                                            Tablet=22,
+                                                            Desktop=30}"
+                                    HorizontalOptions="Center"
+                                    Source="m_video.svg"
+                                    VerticalOptions="Center" />
+
+                                <BoxView
+                                    x:Name="VideoSlash"
+                                    Margin="{OnIdiom Phone='6,22,0,0',
+                                                     Tablet='8,30,0,0',
+                                                     Desktop='10,40,0,0'}"
+                                    BackgroundColor="{StaticResource TextWhite}"
+                                    HeightRequest="{OnIdiom Phone=2,
+                                                            Tablet=3,
+                                                            Desktop=4}"
+                                    HorizontalOptions="Center"
+                                    IsVisible="False"
+                                    Rotation="-45"
+                                    VerticalOptions="Center"
+                                    WidthRequest="{OnIdiom Phone=30,
+                                                           Tablet=42,
+                                                           Desktop=56}" />
+                            </Grid>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnVideoTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </Grid>
+
+                    <!--  Remote  -->
+                    <Grid
+                        Grid.Column="1"
+                        ColumnDefinitions="Auto,Auto"
+                        ColumnSpacing="{OnIdiom Phone=6,
+                                                Tablet=10,
+                                                Desktop=14}">
+
+                        <Border
+                            BackgroundColor="{StaticResource PrimaryBlue}"
+                            HeightRequest="{OnIdiom Phone=40,
+                                                    Tablet=56,
+                                                    Desktop=72}"
+                            StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                                  Tablet='RoundRectangle 14',
+                                                  Desktop='RoundRectangle 18'}"
+                            WidthRequest="{OnIdiom Phone=40,
+                                                   Tablet=56,
+                                                   Desktop=72}">
+                            <Image
+                                HeightRequest="{OnIdiom Phone=20,
+                                                        Tablet=28,
+                                                        Desktop=36}"
+                                HorizontalOptions="Center"
+                                Source="m_mic.svg"
+                                VerticalOptions="Center" />
+                        </Border>
+
+                        <Border
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource PrimaryBlue}"
+                            HeightRequest="{OnIdiom Phone=40,
+                                                    Tablet=56,
+                                                    Desktop=72}"
+                            StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                                  Tablet='RoundRectangle 14',
+                                                  Desktop='RoundRectangle 18'}"
+                            WidthRequest="{OnIdiom Phone=40,
+                                                   Tablet=56,
+                                                   Desktop=72}">
+                            <Image
+                                HeightRequest="{OnIdiom Phone=16,
+                                                        Tablet=22,
+                                                        Desktop=30}"
+                                HorizontalOptions="Center"
+                                Source="m_video.svg"
+                                VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+
+                    <!--  Camera switch + speaker  -->
+                    <Grid
+                        Grid.Column="2"
+                        ColumnDefinitions="Auto,Auto"
+                        ColumnSpacing="{OnIdiom Phone=6,
+                                                Tablet=10,
+                                                Desktop=14}">
+
+                        <!--  Camera Switch  -->
+                        <Border
+                            Grid.Column="0"
+                            BackgroundColor="{StaticResource HeaderIconBg}"
+                            HeightRequest="{OnIdiom Phone=40,
+                                                    Tablet=56,
+                                                    Desktop=72}"
+                            StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                                  Tablet='RoundRectangle 14',
+                                                  Desktop='RoundRectangle 18'}"
+                            WidthRequest="{OnIdiom Phone=40,
+                                                   Tablet=56,
+                                                   Desktop=72}">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCameraSwitchTapped" />
+                            </Border.GestureRecognizers>
+
+                            <Image
+                                HeightRequest="{OnIdiom Phone=30,
+                                                        Tablet=40,
+                                                        Desktop=52}"
+                                HorizontalOptions="Center"
+                                InputTransparent="True"
+                                Source="camera_flip.svg"
+                                VerticalOptions="Center" />
+                        </Border>
+
+                        <!--  Speaker  -->
+                        <Border
+                            x:Name="SpeakerButton"
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource HeaderIconBg}"
+                            HeightRequest="{OnIdiom Phone=40,
+                                                    Tablet=56,
+                                                    Desktop=72}"
+                            StrokeShape="{OnIdiom Phone='RoundRectangle 10',
+                                                  Tablet='RoundRectangle 14',
+                                                  Desktop='RoundRectangle 18'}"
+                            WidthRequest="{OnIdiom Phone=40,
+                                                   Tablet=56,
+                                                   Desktop=72}">
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSpeakerTapped" />
+                            </Border.GestureRecognizers>
+
+                            <Image
+                                HeightRequest="{OnIdiom Phone=16,
+                                                        Tablet=22,
+                                                        Desktop=30}"
+                                HorizontalOptions="Center"
+                                InputTransparent="True"
+                                Source="m_speaker.svg"
+                                VerticalOptions="Center" />
+                        </Border>
+
+                    </Grid>
+
+                </Grid>
+
+                <!--  Leave button  -->
+                <Button
+                    Margin="{OnIdiom Phone='0,20,0,10',
+                                     Tablet='0,28,0,14',
+                                     Desktop='0,36,0,18'}"
+                    BackgroundColor="{StaticResource DangerRed}"
+                    Clicked="OnLeaveRoomClicked"
+                    CornerRadius="{OnIdiom Phone=12,
+                                           Tablet=16,
+                                           Desktop=20}"
+                    FontAttributes="Bold"
+                    FontSize="{OnIdiom Phone=16,
+                                       Tablet=20,
+                                       Desktop=24}"
+                    HeightRequest="{OnIdiom Phone=48,
+                                            Tablet=60,
+                                            Desktop=72}"
+                    Text="Leave Room"
+                    TextColor="{StaticResource TextWhite}" />
+
+            </VerticalStackLayout>
+        </Border>
+
+
+
+
+        <!--  Overlays  -->
+        <!--<overlay:CopiedPopup
+            x:Name="CopiedPopup"
+            Grid.RowSpan="3"
+            ZIndex="998" />-->
+
+        <overlay:SpeakerVolumeOverlay
+            x:Name="SpeakerOverlay"
+            Grid.RowSpan="3"
+            ZIndex="999" />
+
+        <overlay:EmojiOverlayView
+            x:Name="EmojiOverlay"
+            Grid.RowSpan="3"
+            ZIndex="2000" />
+
+        <!--<overlay:LowConnectionPopup
+            x:Name="LowConnectionOverlay"
+            Grid.RowSpan="3"
+            ZIndex="997" />-->
+
+
+
+        <Grid
+            x:Name="FreezeLayer"
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource Transparent}"
+            IsVisible="False"
+            ZIndex="100" />
+
+        <Grid
+            x:Name="LeaveRoomHost"
+            Grid.RowSpan="3"
+            IsVisible="False"
+            ZIndex="200">
+
+            <overlay:LeaveRoomOverlay
+                x:Name="LeaveRoomView"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+        </Grid>
+    </Grid>
+</ContentPage>

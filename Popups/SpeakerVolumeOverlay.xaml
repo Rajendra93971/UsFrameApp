@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+	x:Class="UsFrameApp.Popups.SpeakerVolumeOverlay"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	IsVisible="False">
+
+	<!--  full screen overlay  -->
+	<Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+
+		<!--  outside tap layer  -->
+		<BoxView
+			BackgroundColor="Transparent"
+			HorizontalOptions="Fill"
+			VerticalOptions="Fill">
+			<BoxView.GestureRecognizers>
+				<TapGestureRecognizer Tapped="OnOutsideTapped" />
+			</BoxView.GestureRecognizers>
+		</BoxView>
+
+		<!--  volume control panel  -->
+		<Border
+			Margin="0,0,24,0"
+			BackgroundColor="#FFFFFF"
+			HeightRequest="200"
+			HorizontalOptions="End"
+			Shadow="{x:Null}"
+			StrokeShape="RoundRectangle 14"
+			VerticalOptions="Center"
+			WidthRequest="48">
+
+			<Grid Padding="6" RowDefinitions="Auto,*">
+
+				<!--  volume value  -->
+				<Label
+					x:Name="VolumeText"
+					FontAttributes="Bold"
+					FontSize="14"
+					HorizontalTextAlignment="Center"
+					Text="0"
+					TextColor="#000" />
+
+				<!--  volume slider  -->
+				<Slider
+					x:Name="VolumeSlider"
+					Grid.Row="1"
+					DragCompleted="OnDragCompleted"
+					Maximum="100"
+					MaximumTrackColor="#AAA"
+					Minimum="0"
+					MinimumTrackColor="#000"
+					Rotation="-90"
+					ThumbColor="#000"
+					ValueChanged="OnVolumeChanged"
+					WidthRequest="150" />
+
+			</Grid>
+		</Border>
+	</Grid>
+</ContentView>

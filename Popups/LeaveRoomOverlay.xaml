@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="UsFrameApp.Popups.LeaveRoomOverlay"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+
+	<Border
+        Padding="24"
+        BackgroundColor="#FFFFFF"
+        HorizontalOptions="Center"
+        StrokeShape="RoundRectangle 20"
+        StrokeThickness="0"
+        VerticalOptions="Center"
+        WidthRequest="{OnIdiom Phone=320,
+                               Tablet=360,
+                               Desktop=400}">
+
+		<VerticalStackLayout HorizontalOptions="Center" Spacing="16">
+
+			<!--  Icon: illustrative graphic for leave confirmation  -->
+			<Border
+                BackgroundColor="#EAF1FF"
+                HeightRequest="64"
+                HorizontalOptions="Center"
+                StrokeShape="RoundRectangle 32"
+                VerticalOptions="Center"
+                WidthRequest="64">
+
+				<Image
+                    Aspect="Fill"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    Rotation="180"
+                    Source="backicon.png"
+                    VerticalOptions="Center"
+                    WidthRequest="60" />
+			</Border>
+
+			<!--  Title: leave room confirmation title  -->
+			<Label
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                Text="Leave Room"
+                TextColor="#146CFF" />
+
+			<!--  Message: user-facing confirmation text  -->
+			<Label
+                FontSize="14"
+                HorizontalTextAlignment="Center"
+                Text="Are you sure you want to leave the room?"
+                TextColor="#555" />
+
+			<!--  Buttons: cancel or confirm leaving the room  -->
+			<Grid
+                Margin="0,8,0,0"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="12">
+
+				<Button
+                    BackgroundColor="Transparent"
+                    BorderColor="#D0D0D0"
+                    BorderWidth="1"
+                    Clicked="OnCancelClicked"
+                    CornerRadius="24"
+                    MinimumHeightRequest="44"
+                    Text="Cancel"
+                    TextColor="#146CFF" />
+
+				<Button
+                    Grid.Column="1"
+                    BackgroundColor="#146CFF"
+                    Clicked="OnLeaveClicked"
+                    CornerRadius="24"
+                    MinimumHeightRequest="44"
+                    Text="Yes, Leave"
+                    TextColor="White" />
+			</Grid>
+
+		</VerticalStackLayout>
+	</Border>
+</ContentView>

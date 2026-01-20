@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+	x:Class="UsFrameApp.Popups.AppAlertPopup"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+	Color="Transparent">
+
+	<!--  fullscreen overlay  -->
+	<Grid
+		ColumnDefinitions="*,Auto"
+		HorizontalOptions="Fill"
+		VerticalOptions="Fill">
+
+		<!--  alert card  -->
+		<Border
+			x:Name="AlertBorder"
+			Grid.ColumnSpan="2"
+			Padding="20"
+			BackgroundColor="White"
+			HorizontalOptions="Center"
+			Shadow="{x:Null}"
+			Stroke="Transparent"
+			StrokeShape="RoundRectangle 14"
+			VerticalOptions="Center"
+			WidthRequest="280">
+
+			<VerticalStackLayout Spacing="14">
+
+				<!--  title  -->
+				<Label
+					x:Name="TitleLabel"
+					FontAttributes="Bold"
+					FontSize="17"
+					HorizontalTextAlignment="Center"
+					TextColor="#000" />
+
+				<!--  message  -->
+				<Label
+					x:Name="MessageLabel"
+					FontSize="16"
+					HorizontalTextAlignment="Center"
+					TextColor="#555" />
+
+				<!--  ok action  -->
+				<Button
+					x:Name="OkButton"
+					BackgroundColor="#146CFF"
+					Clicked="OnOkClicked"
+					CornerRadius="8"
+					HeightRequest="40"
+					Text="OK"
+					TextColor="White" />
+
+			</VerticalStackLayout>
+		</Border>
+	</Grid>
+</toolkit:Popup>

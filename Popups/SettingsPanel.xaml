@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+	x:Class="UsFrameApp.Popups.SettingsPanel"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	BackgroundColor="Transparent"
+	IsVisible="False">
+
+	<Grid HorizontalOptions="Fill" VerticalOptions="Start">
+		<Border
+			x:Name="Panel"
+			Padding="18"
+			BackgroundColor="White"
+			HorizontalOptions="Fill"
+			StrokeShape="RoundRectangle 20"
+			VerticalOptions="Start">
+			<VerticalStackLayout Spacing="12">
+				<!--  header  -->
+				<Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+					<Label
+						FontAttributes="Bold"
+						FontSize="20"
+						Text="Settings"
+						TextColor="#111827"
+						VerticalOptions="Center" />
+					<ImageButton
+						BackgroundColor="Transparent"
+						Clicked="OnCloseClicked"
+						HeightRequest="28"
+						Source="s_close.svg"
+						WidthRequest="28" />
+				</Grid>
+
+				<ScrollView>
+					<VerticalStackLayout Padding="0,6,0,12" Spacing="18">
+						<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+							<VerticalStackLayout Spacing="2">
+								<Label
+									FontAttributes="Bold"
+									FontSize="15"
+									Text="Self View"
+									TextColor="#111827" />
+								<Label
+									FontSize="13"
+									Text="toggle self view"
+									TextColor="#6B6B6B" />
+							</VerticalStackLayout>
+							<Switch
+								x:Name="SelfViewSwitch"
+								Grid.Column="1"
+								HorizontalOptions="End"
+								Toggled="SelfViewSwitch_Toggled" />
+						</Grid>
+
+						<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+							<VerticalStackLayout Spacing="2">
+								<Label
+									FontAttributes="Bold"
+									FontSize="15"
+									Text="Debug Mode"
+									TextColor="#111827" />
+								<Label
+									FontSize="13"
+									Text="enable debug mode"
+									TextColor="#6B6B6B" />
+							</VerticalStackLayout>
+							<Switch
+								x:Name="DebugSwitch"
+								Grid.Column="1"
+								HorizontalOptions="End"
+								Toggled="DebugSwitch_Toggled" />
+						</Grid>
+
+						<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+							<VerticalStackLayout Spacing="2">
+								<Label
+									FontAttributes="Bold"
+									FontSize="15"
+									Text="Expand Video"
+									TextColor="#111827" />
+								<Label
+									FontSize="13"
+									Text="expand video removing black bars"
+									TextColor="#6B6B6B" />
+							</VerticalStackLayout>
+							<Switch
+								x:Name="ExpandSwitch"
+								Grid.Column="1"
+								HorizontalOptions="End"
+								Toggled="ExpandSwitch_Toggled" />
+						</Grid>
+
+						<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+							<VerticalStackLayout Spacing="2">
+								<Label
+									FontAttributes="Bold"
+									FontSize="15"
+									Text="Night Mode"
+									TextColor="#111827" />
+								<Label
+									FontSize="13"
+									Text="turn video brightness to 70%"
+									TextColor="#6B6B6B" />
+							</VerticalStackLayout>
+							<Switch
+								x:Name="NightSwitch"
+								Grid.Column="1"
+								HorizontalOptions="End"
+								Toggled="NightSwitch_Toggled" />
+						</Grid>
+					</VerticalStackLayout>
+				</ScrollView>
+			</VerticalStackLayout>
+		</Border>
+	</Grid>
+</ContentView>

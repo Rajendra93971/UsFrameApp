@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="UsFrameApp.View.ConnectingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource TextWhite}"
+    NavigationPage.HasNavigationBar="False">
+
+    <!--  Root layout container  -->
+    <Grid Padding="{OnPlatform iOS='16,0', Android='16,0'}" RowDefinitions="Auto,*,Auto">
+
+
+        <!--  Scrollable content  -->
+        <ScrollView
+            Grid.Row="1"
+            Orientation="Vertical"
+            VerticalScrollBarVisibility="Never">
+
+            <!--  Page content  -->
+            <VerticalStackLayout Spacing="24">
+
+                <!--  Header  -->
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Margin="0,20,0,0"
+                    Spacing="16">
+
+
+                    <!--  Logo icon  -->
+                    <Image
+                        HeightRequest="{OnIdiom Phone=36,
+                                                Tablet=48,
+                                                Desktop=420}"
+                        HorizontalOptions="Start"
+                        Source="logo.svg"
+                        WidthRequest="{OnIdiom Phone=-1,
+                                               Tablet=72,
+                                               Desktop=90}" />
+
+                    <!--  Title  -->
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="{OnIdiom Phone=26,
+                                           Tablet=40}"
+                        HorizontalTextAlignment="Start"
+                        Text="UsFrame!"
+                        TextColor="{StaticResource PrimaryBlue}" />
+
+                </VerticalStackLayout>
+
+                <!--  Main content  -->
+                <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+
+                    <!--  Connecting icon spinner  -->
+                    <Border
+                        BackgroundColor="{StaticResource LightBlueBg}"
+                        HeightRequest="{OnIdiom Phone=74,
+                                                Tablet=148,
+                                                Desktop=210}"
+                        HorizontalOptions="Center"
+                        StrokeShape="{OnIdiom Phone='RoundRectangle 20',
+                                              Tablet='RoundRectangle 30',
+                                              Desktop='RoundRectangle 40'}"
+                        Style="{StaticResource CustomBorder}"
+                        WidthRequest="{OnIdiom Phone=74,
+                                               Tablet=148,
+                                               Desktop=210}">
+
+                        <Image
+                            x:Name="ConnectingIcon"
+                            HeightRequest="{OnIdiom Phone=53,
+                                                    Tablet=106,
+                                                    Desktop=159}"
+                            HorizontalOptions="Center"
+                            Source="c_connecting.svg"
+                            VerticalOptions="Center"
+                            WidthRequest="{OnIdiom Phone=53,
+                                                   Tablet=106,
+                                                   Desktop=159}" />
+                    </Border>
+
+                    <!--  Title  -->
+
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="{OnIdiom Phone=22,
+                                           Tablet=44}"
+                        HorizontalTextAlignment="Center"
+                        Text="Connecting"
+                        TextColor="{StaticResource TextBlack}" />
+
+                    <Label
+                        FontSize="{OnIdiom Phone=13,
+                                           Tablet=26}"
+                        HorizontalTextAlignment="Center"
+                        Text="Joining the room"
+                        TextColor="{StaticResource TextMuted}" />
+                </VerticalStackLayout>
+
+                <!--  Process content  -->
+                <VerticalStackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center">
+
+                    <!--  Process card  -->
+                    <Border
+                        Padding="{OnIdiom Phone='0,10',
+                                          Tablet='0,14',
+                                          Desktop='0,20'}"
+                        BackgroundColor="{StaticResource ProcessCardBg}"
+                        StrokeShape="RoundRectangle 16"
+                        Style="{StaticResource CustomBorder}">
+
+                        <Grid
+                            ColumnDefinitions="30,*"
+                            RowDefinitions="Auto,Auto,Auto,Auto"
+                            RowSpacing="24">
+
+                            <!--  Verticle line  -->
+                            <BoxView
+                                Grid.RowSpan="4"
+                                Grid.Column="0"
+                                Margin="{OnIdiom Phone='3,10,0,0',
+                                                 Tablet='14,32,0,0',
+                                                 Desktop='9,28,0,0'}"
+                                BackgroundColor="{Binding Line1Color}"
+                                HeightRequest="{Binding LineHeight}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                WidthRequest="{OnIdiom Phone=2,
+                                                       Tablet=4,
+                                                       Desktop=6}" />
+
+
+
+                            <!--  Process 1  -->
+                            <HorizontalStackLayout
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Spacing="12"
+                                VerticalOptions="Start">
+
+                                <!--  Status Dot  -->
+                                <Border
+                                    Margin="{OnIdiom Phone='10,-20,0,0',
+                                                     Tablet='10,-34,0,0',
+                                                     Desktop='18,-12,0,0'}"
+                                    BackgroundColor="{Binding Step1Color}"
+                                    HeightRequest="{OnIdiom Phone=15,
+                                                            Tablet=25,
+                                                            Desktop=45}"
+                                    Shadow="{x:Null}"
+                                    StrokeShape="{OnIdiom Phone='RoundRectangle 7.5',
+                                                          Tablet='RoundRectangle 12',
+                                                          Desktop='RoundRectangle 20'}"
+                                    Style="{StaticResource CustomBorder}"
+                                    WidthRequest="{OnIdiom Phone=15,
+                                                           Tablet=25,
+                                                           Desktop=45}" />
+
+                                <!--  Text Section  -->
+                                <VerticalStackLayout Margin="{OnIdiom Phone='0', Tablet='20,0', Desktop='20,0'}" Spacing="{OnIdiom Phone='2', Tablet='6', Desktop='10'}">
+
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="{OnIdiom Phone=16,
+                                                           Tablet=32}"
+                                        Text="Connect to server"
+                                        TextColor="{Binding Step1Color}" />
+
+                                    <Label
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=26}"
+                                        Text="Connected to server"
+                                        TextColor="{StaticResource TextGray}" />
+
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+
+
+
+                            <!--  Process 2  -->
+                            <HorizontalStackLayout
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Spacing="12">
+
+                                <!--  Status Dot  -->
+                                <Border
+                                    Margin="{OnIdiom Phone='10,-20,0,0',
+                                                     Tablet='10,-38,0,0',
+                                                     Desktop='18,-12,0,0'}"
+                                    BackgroundColor="{Binding Step1Color}"
+                                    HeightRequest="{OnIdiom Phone=15,
+                                                            Tablet=25,
+                                                            Desktop=45}"
+                                    Shadow="{x:Null}"
+                                    StrokeShape="{OnIdiom Phone='RoundRectangle 7.5',
+                                                          Tablet='RoundRectangle 12',
+                                                          Desktop='RoundRectangle 20'}"
+                                    Style="{StaticResource CustomBorder}"
+                                    WidthRequest="{OnIdiom Phone=15,
+                                                           Tablet=25,
+                                                           Desktop=45}" />
+
+                                <VerticalStackLayout Margin="{OnIdiom Phone='0', Tablet='20,0', Desktop='20,0'}">
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="{OnIdiom Phone=16,
+                                                           Tablet=32}"
+                                        Text="Prepare your room"
+                                        TextColor="{Binding Step2Color}" />
+
+                                    <Label
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=26}"
+                                        Text="Room ready"
+                                        TextColor="{StaticResource TextGray}" />
+
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+
+
+                            <!--  Process 3  -->
+                            <HorizontalStackLayout
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Spacing="12">
+
+                                <!--  Status Dot  -->
+                                <Border
+                                    Margin="{OnIdiom Phone='10,-38,0,0',
+                                                     Tablet='10,-42,0,30',
+                                                     Desktop='18,-12,0,0'}"
+                                    BackgroundColor="{Binding Step1Color}"
+                                    HeightRequest="{OnIdiom Phone=15,
+                                                            Tablet=25,
+                                                            Desktop=45}"
+                                    Shadow="{x:Null}"
+                                    StrokeShape="{OnIdiom Phone='RoundRectangle 7.5',
+                                                          Tablet='RoundRectangle 12',
+                                                          Desktop='RoundRectangle 20'}"
+                                    Style="{StaticResource CustomBorder}"
+                                    WidthRequest="{OnIdiom Phone=15,
+                                                           Tablet=25,
+                                                           Desktop=45}" />
+
+                                <VerticalStackLayout Margin="{OnIdiom Phone='0', Tablet='20,0', Desktop='20,0'}" HorizontalOptions="Fill">
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="{OnIdiom Phone=16,
+                                                           Tablet=32}"
+                                        Text="Access camera &amp; microphone"
+                                        TextColor="{Binding Step3Color}" />
+
+                                    <Label
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=26}"
+                                        Text="Unable to access camera (Requested device "
+                                        TextColor="{StaticResource TextGray}" />
+
+                                    <Label
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=26}"
+                                        Text="not found)"
+                                        TextColor="{StaticResource TextGray}" />
+
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+
+
+                            <!--  Process 4  -->
+                            <HorizontalStackLayout
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Spacing="10">
+
+                                <!--  Status Dot  -->
+                                <Border
+                                    Margin="{OnIdiom Phone='10,-52,0,0',
+                                                     Tablet='10,-48,0,50',
+                                                     Desktop='18,-12,0,0'}"
+                                    BackgroundColor="{Binding Step1Color}"
+                                    HeightRequest="{OnIdiom Phone=15,
+                                                            Tablet=25,
+                                                            Desktop=45}"
+                                    Shadow="{x:Null}"
+                                    StrokeShape="{OnIdiom Phone='RoundRectangle 7.5',
+                                                          Tablet='RoundRectangle 12',
+                                                          Desktop='RoundRectangle 20'}"
+                                    Style="{StaticResource CustomBorder}"
+                                    WidthRequest="{OnIdiom Phone=15,
+                                                           Tablet=25,
+                                                           Desktop=45}" />
+
+                                <VerticalStackLayout Margin="{OnIdiom Phone='0', Tablet='20,2', Desktop='20,0'}">
+
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="{OnIdiom Phone=16,
+                                                           Tablet=32}"
+                                        Text="Join the room"
+                                        TextColor="{Binding Step4Color}" />
+
+                                    <Label
+                                        FontSize="{OnIdiom Phone=13,
+                                                           Tablet=26}"
+                                        Text="Camera was unavailable. Join aborted."
+                                        TextColor="{StaticResource TextGray}" />
+
+                                    <!--  Divider line & text  -->
+                                    <BoxView
+                                        Margin="{OnIdiom Phone='0,8',
+                                                         Tablet='0,12',
+                                                         Desktop='0,16'}"
+                                        BackgroundColor="{StaticResource DividerGray}"
+                                        HeightRequest="{OnIdiom Phone='1',
+                                                                Tablet='2',
+                                                                Desktop='2'}"
+                                        HorizontalOptions="Fill" />
+
+
+                                    <Label
+                                        FontSize="{OnIdiom Phone=16,
+                                                           Tablet=32}"
+                                        Text="Wait for the other participant"
+                                        TextColor="{StaticResource TextBlack}" />
+
+                                </VerticalStackLayout>
+
+                            </HorizontalStackLayout>
+
+                        </Grid>
+                    </Border>
+
+                </VerticalStackLayout>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
