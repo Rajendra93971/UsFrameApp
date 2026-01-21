@@ -83,6 +83,9 @@
 	  <MauiXaml Update="Popups\LeaveRoomOverlay.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Popups\LowConnectionPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Popups\QrPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

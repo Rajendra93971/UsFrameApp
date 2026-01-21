@@ -1,303 +1,309 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-	x:Class="UsFrameApp.View.SettingsPage"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:overlay="clr-namespace:UsFrameApp.Popups"
-	BackgroundColor="White"
-	NavigationPage.HasNavigationBar="False">
+    x:Class="UsFrameApp.View.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:overlay="clr-namespace:UsFrameApp.Popups"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
 
-	<ContentPage.Resources>
-		<Style x:Key="IconBtn" TargetType="Border">
-			<Setter Property="HeightRequest" Value="44" />
-			<Setter Property="WidthRequest" Value="44" />
-			<!--  Border ->  -->
-			<Setter Property="StrokeShape" Value="RoundRectangle 10" />
-			<Setter Property="BackgroundColor" Value="#E9F0FF" />
-			<Setter Property="HorizontalOptions" Value="Center" />
-			<Setter Property="VerticalOptions" Value="Center" />
-		</Style>
-		<Style x:Key="SmallIcon" TargetType="Image">
-			<Setter Property="HeightRequest" Value="18" />
-			<Setter Property="WidthRequest" Value="18" />
-			<Setter Property="HorizontalOptions" Value="Center" />
-			<Setter Property="VerticalOptions" Value="Center" />
-		</Style>
-		<Style x:Key="HelperText" TargetType="Label">
-			<Setter Property="FontSize" Value="13" />
-			<Setter Property="TextColor" Value="#6B6B6B" />
-		</Style>
-	</ContentPage.Resources>
+    <ContentPage.Resources>
+        <Style x:Key="IconBtn" TargetType="Border">
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="WidthRequest" Value="44" />
+            <!--  Border ->  -->
+            <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+            <Setter Property="BackgroundColor" Value="#E9F0FF" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="SmallIcon" TargetType="Image">
+            <Setter Property="HeightRequest" Value="18" />
+            <Setter Property="WidthRequest" Value="18" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="HelperText" TargetType="Label">
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="TextColor" Value="#6B6B6B" />
+        </Style>
+    </ContentPage.Resources>
 
-	<Grid
-		Padding="16"
-		ColumnDefinitions="*"
-		RowDefinitions="Auto,Auto,Auto,*,Auto"
-		RowSpacing="12">
+    <Grid
+        Padding="16"
+        ColumnDefinitions="*"
+        RowDefinitions="Auto,Auto,Auto,*,Auto"
+        RowSpacing="12">
 
-		<!--  Top row  -->
-		<Grid
-			Grid.Row="0"
-			ColumnDefinitions="Auto,*,Auto"
-			HeightRequest="44"
-			VerticalOptions="Start">
-			<Image
-				HeightRequest="36"
-				Source="logo.svg"
-				VerticalOptions="Center"
-				WidthRequest="36" />
-			<Label
-				Grid.Column="1"
-				Margin="12,0,0,0"
-				FontAttributes="Bold"
-				FontSize="22"
-				HorizontalOptions="Start"
-				Text="UsFrame!"
-				TextColor="#146CFF"
-				VerticalOptions="Center" />
+        <!--  Top row  -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="Auto,*,Auto"
+            HeightRequest="44"
+            VerticalOptions="Start">
+            <Image
+                HeightRequest="36"
+                Source="logo.svg"
+                VerticalOptions="Center"
+                WidthRequest="36" />
+            <Label
+                Grid.Column="1"
+                Margin="12,0,0,0"
+                FontAttributes="Bold"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="UsFrame!"
+                TextColor="#146CFF"
+                VerticalOptions="Center" />
 
-			<!--  StrokeShape instead of CornerRadius  -->
+            <!--  StrokeShape instead of CornerRadius  -->
 
-			<Border
-				Grid.Column="2"
-				BackgroundColor="#F6F7FB"
-				HeightRequest="36"
-				HorizontalOptions="End"
-				StrokeShape="RoundRectangle 18"
-				VerticalOptions="Center"
-				WidthRequest="36">
-				<ImageButton
-					BackgroundColor="Transparent"
-					Clicked="OnCloseClicked"
-					HeightRequest="24"
-					Source="m_settings.svg"
-					WidthRequest="24" />
-			</Border>
-		</Grid>
+            <Border
+                Grid.Column="2"
+                BackgroundColor="#F6F7FB"
+                HeightRequest="36"
+                HorizontalOptions="End"
+                StrokeShape="RoundRectangle 18"
+                VerticalOptions="Center"
+                WidthRequest="36">
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Clicked="OnCloseClicked"
+                    HeightRequest="24"
+                    Source="m_settings.svg"
+                    WidthRequest="24" />
+            </Border>
+        </Grid>
 
-		<!--  Link row  -->
-		<Grid
-			Grid.Row="1"
-			ColumnDefinitions="*,Auto,Auto"
-			ColumnSpacing="8"
-			VerticalOptions="Start">
-			<Entry
-				x:Name="InfoLabel"
-				Grid.Column="0"
-				Margin="0"
-				BackgroundColor="#F6F7FB"
-				FontSize="14"
-				HeightRequest="44"
-				HorizontalOptions="Fill"
-				Placeholder="https://usframe.com/room/..."
-				TextColor="#111" />
+        <!--  Link row  -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,Auto,Auto"
+            ColumnSpacing="8"
+            VerticalOptions="Start">
+            <Entry
+                x:Name="InfoLabel"
+                Grid.Column="0"
+                Margin="0"
+                BackgroundColor="#F6F7FB"
+                FontSize="14"
+                HeightRequest="44"
+                HorizontalOptions="Fill"
+                Placeholder="https://usframe.com/room/..."
+                TextColor="#111" />
 
-			<ImageButton
-				Grid.Column="1"
-				BackgroundColor="Transparent"
-				Clicked="OnCopyClicked"
-				HeightRequest="44"
-				Source="m_copy.svg"
-				WidthRequest="44" />
+            <ImageButton
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Clicked="OnCopyClicked"
+                HeightRequest="44"
+                Source="m_copy.svg"
+                WidthRequest="44" />
 
-			<!--  StrokeShape for rounded fill  -->
-			<Border
-				Grid.Column="2"
-				BackgroundColor="#146CFF"
-				HeightRequest="44"
-				StrokeShape="RoundRectangle 10"
-				WidthRequest="44">
-				<ImageButton
-					BackgroundColor="Transparent"
-					Clicked="OnQrTapped"
-					HeightRequest="24"
-					Source="m_qr.svg"
-					WidthRequest="24" />
-			</Border>
-		</Grid>
+            <!--  StrokeShape for rounded fill  -->
+            <Border
+                Grid.Column="2"
+                BackgroundColor="#146CFF"
+                HeightRequest="44"
+                StrokeShape="RoundRectangle 10"
+                WidthRequest="44">
+                <ImageButton
+                    BackgroundColor="Transparent"
+                    Clicked="OnQrTapped"
+                    HeightRequest="24"
+                    Source="m_qr.svg"
+                    WidthRequest="24" />
+            </Border>
+        </Grid>
 
-		<!--  Settings heading  -->
-		<Grid
-			Grid.Row="2"
-			Margin="0,8,0,0"
-			ColumnDefinitions="*,Auto"
-			VerticalOptions="Start">
-			<Label
-				FontAttributes="Bold"
-				FontSize="20"
-				Text="Settings"
-				TextColor="#111827"
-				VerticalOptions="Center" />
-			<ImageButton
-				Grid.Column="1"
-				BackgroundColor="Transparent"
-				Clicked="OnCloseClicked"
-				HeightRequest="28"
-				Source="s_close.svg"
-				WidthRequest="28" />
-		</Grid>
+        <!--  Settings heading  -->
+        <Grid
+            Grid.Row="2"
+            Margin="0,8,0,0"
+            ColumnDefinitions="*,Auto"
+            VerticalOptions="Start">
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Settings"
+                TextColor="#111827"
+                VerticalOptions="Center" />
+            <ImageButton
+                Grid.Column="1"
+                BackgroundColor="Transparent"
+                Clicked="OnCloseClicked"
+                HeightRequest="28"
+                Source="s_close.svg"
+                WidthRequest="28" />
+        </Grid>
 
-		<!--  Settings list  -->
-		<ScrollView Grid.Row="3">
-			<VerticalStackLayout Padding="0,8,0,0" Spacing="18">
+        <!--  Settings list  -->
+        <ScrollView Grid.Row="3">
+            <VerticalStackLayout Padding="0,8,0,0" Spacing="18">
 
-				<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
-					<VerticalStackLayout Spacing="2">
-						<Label
-							FontAttributes="Bold"
-							FontSize="15"
-							Text="Self View"
-							TextColor="#111827" />
-						<Label Style="{StaticResource HelperText}" Text="toggle self view" />
-					</VerticalStackLayout>
-					<Switch
-						x:Name="SelfViewSwitch"
-						Grid.Column="1"
-						HorizontalOptions="End"
-						Toggled="OnSelfViewSwitchToggled" />
-				</Grid>
+                <Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+                    <VerticalStackLayout Spacing="2">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Self View"
+                            TextColor="#111827" />
+                        <Label Style="{StaticResource HelperText}" Text="toggle self view" />
+                    </VerticalStackLayout>
+                    <Switch
+                        x:Name="SelfViewSwitch"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Toggled="OnSelfViewSwitchToggled" />
+                </Grid>
 
-				<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
-					<VerticalStackLayout Spacing="2">
-						<Label
-							FontAttributes="Bold"
-							FontSize="15"
-							Text="Debug Mode"
-							TextColor="#111827" />
-						<Label Style="{StaticResource HelperText}" Text="enable debug mode" />
-					</VerticalStackLayout>
-					<Switch
-						x:Name="DebugSwitch"
-						Grid.Column="1"
-						HorizontalOptions="End"
-						Toggled="OnDebugSwitchToggled" />
-				</Grid>
+                <Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+                    <VerticalStackLayout Spacing="2">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Debug Mode"
+                            TextColor="#111827" />
+                        <Label Style="{StaticResource HelperText}" Text="enable debug mode" />
+                    </VerticalStackLayout>
+                    <Switch
+                        x:Name="DebugSwitch"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Toggled="OnDebugSwitchToggled" />
+                </Grid>
 
-				<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
-					<VerticalStackLayout Spacing="2">
-						<Label
-							FontAttributes="Bold"
-							FontSize="15"
-							Text="Expand Video"
-							TextColor="#111827" />
-						<Label Style="{StaticResource HelperText}" Text="expand video removing black bars" />
-					</VerticalStackLayout>
-					<Switch
-						x:Name="ExpandSwitch"
-						Grid.Column="1"
-						HorizontalOptions="End"
-						Toggled="OnExpandSwitchToggled" />
-				</Grid>
+                <Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+                    <VerticalStackLayout Spacing="2">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Expand Video"
+                            TextColor="#111827" />
+                        <Label Style="{StaticResource HelperText}" Text="expand video removing black bars" />
+                    </VerticalStackLayout>
+                    <Switch
+                        x:Name="ExpandSwitch"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Toggled="OnExpandSwitchToggled" />
+                </Grid>
 
-				<Grid ColumnDefinitions="*,Auto" RowSpacing="2">
-					<VerticalStackLayout Spacing="2">
-						<Label
-							FontAttributes="Bold"
-							FontSize="15"
-							Text="Night Mode"
-							TextColor="#111827" />
-						<Label Style="{StaticResource HelperText}" Text="turn video brightness to 70%" />
-					</VerticalStackLayout>
-					<Switch
-						x:Name="NightSwitch"
-						Grid.Column="1"
-						HorizontalOptions="End"
-						Toggled="OnNightSwitchToggled" />
-				</Grid>
+                <Grid ColumnDefinitions="*,Auto" RowSpacing="2">
+                    <VerticalStackLayout Spacing="2">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="Night Mode"
+                            TextColor="#111827" />
+                        <Label Style="{StaticResource HelperText}" Text="turn video brightness to 70%" />
+                    </VerticalStackLayout>
+                    <Switch
+                        x:Name="NightSwitch"
+                        Grid.Column="1"
+                        HorizontalOptions="End"
+                        Toggled="OnNightSwitchToggled" />
+                </Grid>
 
-				<Frame
-					Margin="0,6,0,0"
-					Padding="12"
-					BackgroundColor="#F6F7FB"
-					CornerRadius="12"
-					HasShadow="False">
-					<VerticalStackLayout Spacing="10">
-						<Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-							<Label
-								FontAttributes="Bold"
-								Text="Local"
-								TextColor="#6B6B6B"
-								VerticalOptions="Center" />
-							<Label
-								FontAttributes="Bold"
-								HorizontalOptions="Center"
-								Text="Remote"
-								TextColor="#6B6B6B"
-								VerticalOptions="Center" />
-						</Grid>
+                <Frame
+                    Margin="0,6,0,0"
+                    Padding="12"
+                    BackgroundColor="#F6F7FB"
+                    CornerRadius="12"
+                    HasShadow="False">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Local"
+                                TextColor="#6B6B6B"
+                                VerticalOptions="Center" />
+                            <Label
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="Remote"
+                                TextColor="#6B6B6B"
+                                VerticalOptions="Center" />
+                        </Grid>
 
-						<Grid ColumnDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12">
-							<Border
-								x:Name="MicBorder"
-								BackgroundColor="#146CFF"
-								Style="{StaticResource IconBtn}">
-								<Image Source="m_mic.svg" Style="{StaticResource SmallIcon}" />
-							</Border>
+                        <Grid ColumnDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12">
+                            <Border
+                                x:Name="MicBorder"
+                                BackgroundColor="#146CFF"
+                                Style="{StaticResource IconBtn}">
+                                <Image Source="m_mic.svg" Style="{StaticResource SmallIcon}" />
+                            </Border>
 
-							<Border
-								x:Name="VideoBorder"
-								BackgroundColor="#146CFF"
-								Style="{StaticResource IconBtn}">
-								<Image Source="m_video.svg" Style="{StaticResource SmallIcon}" />
-							</Border>
+                            <Border
+                                x:Name="VideoBorder"
+                                BackgroundColor="#146CFF"
+                                Style="{StaticResource IconBtn}">
+                                <Image Source="m_video.svg" Style="{StaticResource SmallIcon}" />
+                            </Border>
 
-							<Border
-								BackgroundColor="#FFFFFF"
-								HeightRequest="44"
-								StrokeShape="RoundRectangle 10"
-								WidthRequest="44">
-								<Image Source="m_mic.svg" Style="{StaticResource SmallIcon}" />
-							</Border>
+                            <Border
+                                BackgroundColor="#FFFFFF"
+                                HeightRequest="44"
+                                StrokeShape="RoundRectangle 10"
+                                WidthRequest="44">
+                                <Image Source="m_mic.svg" Style="{StaticResource SmallIcon}" />
+                            </Border>
 
-							<Border
-								BackgroundColor="#FFFFFF"
-								HeightRequest="44"
-								StrokeShape="RoundRectangle 10"
-								WidthRequest="44">
-								<Image Source="m_video.svg" Style="{StaticResource SmallIcon}" />
-							</Border>
+                            <Border
+                                BackgroundColor="#FFFFFF"
+                                HeightRequest="44"
+                                StrokeShape="RoundRectangle 10"
+                                WidthRequest="44">
+                                <Image Source="m_video.svg" Style="{StaticResource SmallIcon}" />
+                            </Border>
 
-							<Border
-								Grid.ColumnSpan="5"
-								BackgroundColor="#EEF2FF"
-								HeightRequest="44"
-								HorizontalOptions="End"
-								StrokeShape="RoundRectangle 10"
-								WidthRequest="44">
-								<Image Source="m_speaker.svg" Style="{StaticResource SmallIcon}" />
-							</Border>
-						</Grid>
-					</VerticalStackLayout>
-				</Frame>
+                            <Border
+                                Grid.ColumnSpan="5"
+                                BackgroundColor="#EEF2FF"
+                                HeightRequest="44"
+                                HorizontalOptions="End"
+                                StrokeShape="RoundRectangle 10"
+                                WidthRequest="44">
+                                <Image Source="m_speaker.svg" Style="{StaticResource SmallIcon}" />
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
 
-				<Button
-					BackgroundColor="#FF1B1B"
-					Clicked="OnLeaveRoomClicked"
-					CornerRadius="12"
-					HeightRequest="48"
-					HorizontalOptions="Fill"
-					Text="Leave Room"
-					TextColor="White" />
+                <Button
+                    BackgroundColor="#FF1B1B"
+                    Clicked="OnLeaveRoomClicked"
+                    CornerRadius="12"
+                    HeightRequest="48"
+                    HorizontalOptions="Fill"
+                    Text="Leave Room"
+                    TextColor="White" />
 
-				<BoxView BackgroundColor="Transparent" HeightRequest="18" />
-			</VerticalStackLayout>
-		</ScrollView>
+                <BoxView BackgroundColor="Transparent" HeightRequest="18" />
+            </VerticalStackLayout>
+        </ScrollView>
 
-		<!--  LeaveRoomHost and FreezeLayer elements  -->
-		<Grid
-			x:Name="LeaveRoomHost"
-			Grid.Row="0"
-			Grid.RowSpan="2"
-			BackgroundColor="Transparent"
-			IsVisible="False"
-			ZIndex="1001" />
-		<BoxView
-			x:Name="FreezeLayer"
-			Grid.Row="0"
-			Grid.RowSpan="2"
-			IsVisible="False"
-			ZIndex="1000"
-			Color="#00000066" />
-		<overlay:SpeakerVolumeOverlay x:Name="SpeakerOverlay" IsVisible="False" />
-	</Grid>
+        <!--  LeaveRoomHost and FreezeLayer elements  -->
+
+        <overlay:CopiedPopup
+            x:Name="CopiedPopup"
+            Grid.RowSpan="3"
+            ZIndex="999" />
+
+        <Grid
+            x:Name="LeaveRoomHost"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            BackgroundColor="Transparent"
+            IsVisible="False"
+            ZIndex="1001" />
+        <BoxView
+            x:Name="FreezeLayer"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            IsVisible="False"
+            ZIndex="1000"
+            Color="#00000066" />
+        <overlay:SpeakerVolumeOverlay x:Name="SpeakerOverlay" IsVisible="False" />
+    </Grid>
 </ContentPage>

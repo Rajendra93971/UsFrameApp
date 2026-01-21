@@ -10,14 +10,14 @@
         Padding="{OnIdiom Phone=24,
                           Tablet=32,
                           Desktop=40}"
-        BackgroundColor="#FFFFFF"
+        BackgroundColor="#DDD"
         HorizontalOptions="Center"
         StrokeShape="RoundRectangle 20"
         StrokeThickness="0"
         Style="{StaticResource CustomBorder}"
         VerticalOptions="Center"
         WidthRequest="{OnIdiom Phone=320,
-                               Tablet=360,
+                               Tablet=400,
                                Desktop=400}">
 
         <VerticalStackLayout HorizontalOptions="Center" Spacing="16">
@@ -39,14 +39,14 @@
                 <Image
                     Aspect="Fill"
                     HeightRequest="{OnIdiom Phone=60,
-                                            Tablet=72,
+                                            Tablet=80,
                                             Desktop=84}"
                     HorizontalOptions="Center"
                     Rotation="180"
                     Source="backicon.png"
                     VerticalOptions="Center"
                     WidthRequest="{OnIdiom Phone=60,
-                                           Tablet=72,
+                                           Tablet=82,
                                            Desktop=84}" />
             </Border>
 
@@ -54,7 +54,7 @@
             <Label
                 FontAttributes="Bold"
                 FontSize="{OnIdiom Phone=20,
-                                   Tablet=24,
+                                   Tablet=34,
                                    Desktop=28}"
                 HorizontalTextAlignment="Center"
                 Text="Leave Room"
@@ -63,7 +63,7 @@
             <!--  Message: user-facing confirmation text  -->
             <Label
                 FontSize="{OnIdiom Phone=14,
-                                   Tablet=16,
+                                   Tablet=20,
                                    Desktop=18}"
                 HorizontalTextAlignment="Center"
                 Text="Are you sure you want to leave the room?"
@@ -85,6 +85,9 @@
                     BorderWidth="1"
                     Clicked="OnCancelClicked"
                     CornerRadius="24"
+                    FontSize="{OnIdiom Phone=10,
+                                       Tablet=24,
+                                       Desktop=28}"
                     MinimumHeightRequest="44"
                     Text="Cancel"
                     TextColor="#146CFF" />
@@ -94,6 +97,9 @@
                     BackgroundColor="#146CFF"
                     Clicked="OnLeaveClicked"
                     CornerRadius="24"
+                    FontSize="{OnIdiom Phone=10,
+                                       Tablet=24,
+                                       Desktop=28}"
                     MinimumHeightRequest="44"
                     Text="Yes, Leave"
                     TextColor="White" />

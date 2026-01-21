@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 using UsFrameApp.Popups;
 using Microsoft.Maui.Storage;
@@ -67,8 +67,11 @@ public partial class SettingsPage : ContentPage
             return;
 
         await Clipboard.Default.SetTextAsync(_roomShareUrl);
-        try { await Application.Current.MainPage.ShowPopupAsync(new CopiedPopup()); } catch { }
+
+        // ✅ show overlay instead of toolkit popup
+        CopiedPopup.Show();
     }
+
 
     private async void OnQrTapped(object? sender, EventArgs e)
     {
@@ -159,7 +162,7 @@ public partial class SettingsPage : ContentPage
     private void OnCameraSwitchTapped(object sender, EventArgs e)
     {
         var roomPage = Navigation.NavigationStack.OfType<RoomPage>().LastOrDefault();
-        roomPage?.SwitchCamera();
+        //roomPage?.SwitchCamera();
     }
 
     private void OnSpeakerTapped(object sender, EventArgs e)
